@@ -11,7 +11,7 @@ export interface Props {
 
 const {
   title,
-  description = 'A minimalistic blog with liquid glass design',
+  description = 'Skyward Blog - Thoughts on technology, design, and development',
   image = '/og-image.png',
   activeNav = 'home'
 } = Astro.props;
@@ -72,7 +72,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://example.
       <footer class="footer-glass">
         <div class="container">
           <div class="footer-content">
-            <p>&copy; {new Date().getFullYear()} Your Blog. Built with Astro and liquid glass.</p>
+            <p>&copy; {new Date().getFullYear()} Skyward Blog. Built with Astro and liquid glass.</p>
             <div class="footer-links">
               <a href="/rss.xml" aria-label="RSS Feed">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
