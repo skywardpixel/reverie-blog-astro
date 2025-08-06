@@ -1,16 +1,364 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BlogCard from '../components/BlogCard.astro';
+import { getCollection } from 'astro:content';
 
+const posts = (await getCollection('blog'))
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+  .slice(0, 3);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  title="Home - Liquid Glass Blog"
+  description="A minimalistic blog with liquid glass design"
+  activeNav="home"
+>
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">
+          <span class="title-line">Welcome to</span>
+          <span class="title-line title-gradient">Liquid Glass</span>
+        </h1>
+        <p class="hero-description">
+          A minimalistic blog with a modern liquid glass design.
+          Exploring ideas through the lens of elegant simplicity.
+        </p>
+        <div class="hero-actions">
+          <a href="/blog" class="btn btn-primary">
+            <span>Explore Articles</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+          <a href="/about" class="btn btn-secondary">
+            <span>About</span>
+          </a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="floating-card card-1"></div>
+        <div class="floating-card card-2"></div>
+        <div class="floating-card card-3"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="featured-posts">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Latest Articles</h2>
+        <p class="section-description">Recent thoughts and explorations</p>
+      </div>
+
+      <div class="posts-grid">
+        {posts.map((post) => (
+          <BlogCard post={post} />
+        ))}
+      </div>
+
+      {posts.length > 0 && (
+        <div class="section-footer">
+          <a href="/blog" class="view-all-link">
+            View all articles
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    min-height: calc(100vh - 5rem);
+    display: flex;
+    align-items: center;
+    padding: 4rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-title {
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+
+  .title-line {
+    display: block;
+  }
+
+  .title-gradient {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-shift 8s ease infinite;
+  }
+
+  @keyframes gradient-shift {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  .hero-description {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: rgba(44, 62, 80, 0.8);
+    margin-bottom: 2rem;
+    max-width: 500px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.75rem;
+    border-radius: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.15));
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    color: #6366f1;
+  }
+
+  .btn-primary:hover {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(139, 92, 246, 0.25));
+    border-color: rgba(99, 102, 241, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
+  }
+
+  .btn-secondary {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: rgba(44, 62, 80, 0.9);
+  }
+
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+  }
+
+  .hero-visual {
+    position: relative;
+    height: 500px;
+    perspective: 1000px;
+  }
+
+  .floating-card {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 24px;
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.4);
+  }
+
+  .card-1 {
+    width: 280px;
+    height: 180px;
+    top: 20%;
+    left: 10%;
+    transform: rotate(-10deg) translateZ(50px);
+    animation: float-1 20s ease-in-out infinite;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.03), rgba(139, 92, 246, 0.03));
+  }
+
+  .card-2 {
+    width: 320px;
+    height: 200px;
+    top: 35%;
+    right: 10%;
+    transform: rotate(5deg) translateZ(100px);
+    animation: float-2 18s ease-in-out infinite;
+    background: linear-gradient(135deg, rgba(236, 72, 153, 0.03), rgba(99, 102, 241, 0.03));
+  }
+
+  .card-3 {
+    width: 260px;
+    height: 160px;
+    bottom: 10%;
+    left: 25%;
+    transform: rotate(8deg) translateZ(75px);
+    animation: float-3 22s ease-in-out infinite;
+    background: linear-gradient(135deg, rgba(167, 139, 250, 0.03), rgba(236, 72, 153, 0.03));
+  }
+
+  @keyframes float-1 {
+    0%, 100% {
+      transform: rotate(-10deg) translateZ(50px) translateY(0);
+    }
+    50% {
+      transform: rotate(-8deg) translateZ(60px) translateY(-20px);
+    }
+  }
+
+  @keyframes float-2 {
+    0%, 100% {
+      transform: rotate(5deg) translateZ(100px) translateY(0);
+    }
+    50% {
+      transform: rotate(3deg) translateZ(110px) translateY(-15px);
+    }
+  }
+
+  @keyframes float-3 {
+    0%, 100% {
+      transform: rotate(8deg) translateZ(75px) translateY(0);
+    }
+    50% {
+      transform: rotate(10deg) translateZ(85px) translateY(-25px);
+    }
+  }
+
+  .featured-posts {
+    padding: 6rem 0;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #2c3e50 0%, #6366f1 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .section-description {
+    font-size: 1.125rem;
+    color: rgba(44, 62, 80, 0.7);
+  }
+
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .section-footer {
+    text-align: center;
+  }
+
+  .view-all-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    color: rgba(44, 62, 80, 0.9);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .view-all-link:hover {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  @media (max-width: 1024px) {
+    .hero .container {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+
+    .hero-description {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-actions {
+      justify-content: center;
+    }
+
+    .hero-visual {
+      display: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      min-height: calc(100vh - 4rem);
+      padding: 2rem 0;
+    }
+
+    .hero-title {
+      font-size: 2.5rem;
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+    }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .posts-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .title-gradient,
+    .floating-card {
+      animation: none;
+    }
+  }
+</style>
