@@ -3,15 +3,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
-  title="About - Skyward Blog"
-  description="Learn more about Skyward Blog and its mission"
+  title="About - Skyward"
+  description="Learn more about me and this personal blog"
   activeNav="about"
 >
   <section class="about-hero">
     <div class="container">
       <div class="hero-content">
         <h1 class="hero-title">About</h1>
-        <p class="hero-subtitle">Exploring technology, design, and the future of development</p>
+        <p class="hero-subtitle">A personal space for thoughts, stories, and life reflections</p>
       </div>
     </div>
   </section>
@@ -20,37 +20,35 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="container">
       <div class="content-wrapper">
         <div class="glass-card main-content">
-          <h2>Welcome to Skyward</h2>
+          <h2>Welcome to My Corner of the Internet</h2>
           <p>
-            Skyward is a space for exploring the intersection of technology, design, and human experience.
-            Here, we dive deep into the tools, techniques, and philosophies that shape how we build
-            digital products and experiences.
+            Hi there! This is my personal blog where I write about whatever's on my mind.
+            You'll find thoughts on life, reflections on experiences, and stories about the
+            things that interest me along the way.
           </p>
           <p>
-            This blog represents a commitment to thoughtful development—where every decision is
-            intentional, every line of code serves a purpose, and design is not just about aesthetics
-            but about creating meaningful interactions that improve people's lives.
+            This isn't a professional blog or a platform with a specific focus—it's simply
+            a place where I can share my thoughts and connect with others who might find
+            them interesting or relatable.
           </p>
           <h3>What You'll Find Here</h3>
           <ul>
-            <li>In-depth explorations of modern web development and emerging technologies</li>
-            <li>Design systems, patterns, and the psychology behind great user experiences</li>
-            <li>Performance optimization techniques and accessibility best practices</li>
-            <li>Creative coding experiments and innovative interface design</li>
-            <li>Tools, workflows, and methodologies that enhance development productivity</li>
-            <li>Thoughts on the future of technology and its impact on society</li>
+            <li>Personal reflections and life experiences</li>
+            <li>Thoughts on books, movies, music, and other interests</li>
+            <li>Stories from daily life and observations about the world</li>
+            <li>Updates on personal projects and goals</li>
+            <li>Random musings on topics that catch my attention</li>
+            <li>Honest thoughts about challenges and successes</li>
           </ul>
-          <h3>Built with Purpose</h3>
+          <h3>About This Site</h3>
           <p>
-            Skyward is built using Astro, a modern static site generator that prioritizes performance
-            and developer experience. The sophisticated liquid glass design showcases advanced CSS
-            techniques including backdrop filters, subtle animations, and a refined color palette
-            that prioritizes readability and accessibility.
+            This blog is built with simplicity in mind—clean design, fast loading,
+            and a focus on readability. No distractions, just words and thoughts
+            shared in a comfortable digital space.
           </p>
           <p>
-            Every aspect of this site—from the typography choices to the interaction patterns—
-            reflects the principles discussed within: intentional design, performance-first
-            development, and a commitment to creating delightful user experiences.
+            Thanks for stopping by and taking the time to read what I have to share.
+            Feel free to reach out if something resonates with you.
           </p>
         </div>
 
@@ -141,7 +139,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-weight: 500;
     margin-bottom: 1rem;
     letter-spacing: -0.03em;
-    background: linear-gradient(135deg, #2c3e50 0%, #8b5cf6 100%);
+    background: linear-gradient(135deg, var(--color-text) 0%, var(--color-accent) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -189,7 +187,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-weight: 500;
     margin-bottom: 1.5rem;
     letter-spacing: -0.025em;
-    background: linear-gradient(135deg, rgba(44, 62, 80, 0.95) 0%, rgba(99, 102, 241, 0.95) 100%);
+    background: linear-gradient(135deg, var(--color-text) 0%, var(--color-accent) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -235,7 +233,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     top: 0.5rem;
     width: 6px;
     height: 6px;
-    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    background: var(--color-accent);
     border-radius: 50%;
   }
 
@@ -282,9 +280,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   .social-link:hover {
-    background: rgba(99, 102, 241, 0.1);
-    border-color: rgba(99, 102, 241, 0.2);
-    color: #6366f1;
+    background: rgba(124, 152, 133, 0.1);
+    border-color: var(--color-accent);
+    color: var(--color-accent);
     transform: translateX(4px);
   }
 
@@ -296,11 +294,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   .tech-tag {
     padding: 0.5rem 1rem;
-    background: rgba(139, 92, 246, 0.1);
-    border: 1px solid rgba(139, 92, 246, 0.2);
-    border-radius: 12px;
-    font-size: 0.875rem;
-    color: rgba(167, 139, 250, 0.9);
+    background: rgba(124, 152, 133, 0.1);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-sm);
+    color: var(--color-accent);
     font-weight: 500;
   }
 

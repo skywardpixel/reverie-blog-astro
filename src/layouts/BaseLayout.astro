@@ -11,7 +11,7 @@ export interface Props {
 
 const {
   title,
-  description = 'Skyward Blog - Thoughts on technology, design, and development',
+  description = 'Skyward - Personal thoughts, stories, and life reflections',
   image = '/og-image.png',
   activeNav = 'home'
 } = Astro.props;
@@ -52,7 +52,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://example.
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Playfair+Display:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet" />
   </head>
 
   <body>
@@ -73,7 +73,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://example.
       <footer class="footer-glass">
         <div class="container">
           <div class="footer-content">
-            <p>&copy; {new Date().getFullYear()} Skyward Blog. Built with Astro and liquid glass.</p>
+            <p>&copy; {new Date().getFullYear()} Skyward. A personal blog built with care.</p>
             <div class="footer-links">
               <a href="/rss.xml" aria-label="RSS Feed">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -106,7 +106,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://example.
     display: flex;
     flex-direction: column;
     position: relative;
-    padding-top: 5rem;
+    padding-top: var(--space-md);
   }
 
   .background-effects {
@@ -174,30 +174,28 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://example.
   .footer-glass {
     position: relative;
     z-index: 10;
-    margin-top: 4rem;
-    padding: 2rem 0;
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    margin-top: var(--space-3xl);
+    padding: var(--space-2xl) 0;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
   }
 
   .footer-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 2rem;
+    gap: var(--space-2xl);
   }
 
   .footer-content p {
-    color: rgba(44, 62, 80, 0.7);
+    color: var(--color-text-secondary);
     margin: 0;
-    font-size: 0.875rem;
+    font-size: var(--text-sm);
   }
 
   .footer-links {
     display: flex;
-    gap: 1rem;
+    gap: var(--space-md);
   }
 
   .footer-links a {
@@ -206,18 +204,18 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://example.
     justify-content: center;
     width: 36px;
     height: 36px;
-    background: rgba(255, 255, 255, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    color: rgba(44, 62, 80, 0.7);
-    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    background: #f1f6f2;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    color: var(--color-text-secondary);
+    transition: all var(--transition);
   }
 
   .footer-links a:hover {
-    background: rgba(255, 255, 255, 0.6);
-    border-color: rgba(255, 255, 255, 0.4);
-    color: rgba(99, 102, 241, 0.9);
-    transform: translateY(-2px);
+    background: var(--color-surface);
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    transform: translateY(-1px);
   }
 
   @keyframes float {
@@ -237,7 +235,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://example.
 
   @media (max-width: 640px) {
     .layout-container {
-      padding-top: 4rem;
+      padding-top: 0;
+      padding-bottom: calc(var(--space-3xl) + var(--space-md));
     }
 
     .footer-content {

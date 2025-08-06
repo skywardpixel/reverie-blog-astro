@@ -13,199 +13,114 @@ const navItems = [
 ---
 
 <nav class="nav-glass">
-  <ul class="nav-list">
-    {navItems.map((item) => (
-      <li class="nav-item">
-        <a
-          href={item.href}
-          class={`nav-link ${activeNav === item.id ? 'active' : ''}`}
-          aria-current={activeNav === item.id ? 'page' : undefined}
-        >
-          <span class="nav-icon">
-            {item.id === 'home' && (
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                <polyline points="9 22 9 12 15 12 15 22"></polyline>
-              </svg>
-            )}
-            {item.id === 'blog' && (
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                <line x1="12" y1="6" x2="16" y2="6"></line>
-                <line x1="12" y1="10" x2="16" y2="10"></line>
-              </svg>
-            )}
-            {item.id === 'about' && (
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="12" y1="16" x2="12" y2="12"></line>
-                <line x1="12" y1="8" x2="12.01" y2="8"></line>
-              </svg>
-            )}
-          </span>
-          <span class="nav-text">{item.name}</span>
-        </a>
-      </li>
-    ))}
-    <li class="nav-indicator" aria-hidden="true"></li>
-  </ul>
+  <div class="nav-content">
+    <ul class="nav-list">
+      {navItems.map((item) => (
+        <li class="nav-item">
+          <a
+            href={item.href}
+            class={`nav-link ${activeNav === item.id ? 'active' : ''}`}
+            aria-current={activeNav === item.id ? 'page' : undefined}
+          >
+            {item.name}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
 </nav>
 
 <style>
-  .nav-glass {
-    position: fixed;
-    top: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(40px) saturate(150%);
-    -webkit-backdrop-filter: blur(40px) saturate(150%);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    border-radius: 24px;
-    padding: 0.5rem;
-    z-index: 1000;
-    box-shadow:
-      0 10px 40px rgba(0, 0, 0, 0.1),
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.4),
-      inset 0 -1px 0 0 rgba(0, 0, 0, 0.05);
-    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  .nav-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    max-width: 320px;
+    margin: 0 auto;
+    padding: 0 4px;
   }
 
   .nav-list {
     display: flex;
     align-items: center;
-    gap: 0.25rem;
+    gap: 6px;
     list-style: none;
     margin: 0;
     padding: 0;
-    position: relative;
-  }
-
-  .nav-item {
-    position: relative;
-    z-index: 2;
   }
 
   .nav-link {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.625rem 1rem;
-    color: rgba(44, 62, 80, 0.7);
+    color: var(--color-text-secondary);
     text-decoration: none;
-    border-radius: 16px;
-    font-size: 0.925rem;
-    font-weight: 500;
-    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
     position: relative;
+    white-space: nowrap;
+    padding: 8px 16px;
+    border-radius: 18px;
+    border: 1px solid transparent;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
 
   .nav-link:hover {
-    color: rgba(44, 62, 80, 0.95);
-    background: rgba(255, 255, 255, 0.3);
+    color: var(--color-text);
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05) translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
   .nav-link.active {
-    color: #6366f1;
-    font-weight: 600;
-  }
-
-  .nav-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .nav-link:hover .nav-icon {
-    transform: scale(1.1);
-  }
-
-  .nav-link.active .nav-icon {
-    transform: scale(1.15);
-  }
-
-  .nav-text {
-    font-weight: 500;
-    letter-spacing: -0.01em;
-  }
-
-  /* Active indicator with liquid effect */
-  .nav-indicator {
-    position: absolute;
-    height: calc(100% - 0.5rem);
-    background: linear-gradient(
-      135deg,
-      rgba(99, 102, 241, 0.15),
-      rgba(139, 92, 246, 0.15)
-    );
-    border-radius: 14px;
-    transition: all 300ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    z-index: 1;
-    pointer-events: none;
-    opacity: 0;
+    color: var(--color-text);
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    font-weight: 700;
     box-shadow:
-      0 0 20px rgba(99, 102, 241, 0.2),
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.4);
+      0 2px 12px rgba(0, 0, 0, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.3);
+    transform: scale(1.02);
   }
 
-  .nav-item:nth-child(1).active ~ .nav-indicator,
-  .nav-list:has(.nav-item:nth-child(1) .nav-link.active) .nav-indicator {
-    left: 0.25rem;
-    width: calc(33.33% - 0.16rem);
-    opacity: 1;
+  .nav-link:active {
+    transform: scale(0.95) translateY(1px);
+    transition-duration: 120ms;
   }
 
-  .nav-item:nth-child(2).active ~ .nav-indicator,
-  .nav-list:has(.nav-item:nth-child(2) .nav-link.active) .nav-indicator {
-    left: calc(33.33% + 0.08rem);
-    width: calc(33.33% - 0.16rem);
-    opacity: 1;
-  }
+  @media (max-width: 768px) {
+    .nav-content {
+      max-width: 280px;
+      padding: 0 3px;
+    }
 
-  .nav-item:nth-child(3).active ~ .nav-indicator,
-  .nav-list:has(.nav-item:nth-child(3) .nav-link.active) .nav-indicator {
-    left: calc(66.66% - 0.08rem);
-    width: calc(33.33% - 0.16rem);
-    opacity: 1;
-  }
-
-  /* Mobile optimization */
-  @media (max-width: 640px) {
-    .nav-glass {
-      width: calc(100% - 2rem);
-      top: 0.5rem;
-      padding: 0.375rem;
+    .nav-list {
+      gap: 4px;
     }
 
     .nav-link {
-      padding: 0.5rem 0.75rem;
-      font-size: 0.875rem;
-    }
-
-    .nav-text {
-      display: none;
-    }
-
-    .nav-icon {
-      width: 22px;
-      height: 22px;
-    }
-
-    .nav-link {
-      padding: 0.625rem;
+      font-size: 10px;
+      padding: 6px 12px;
+      border-radius: 20px;
     }
   }
 
-  /* Hover effects for desktop */
-  @media (min-width: 641px) {
-    .nav-glass:hover {
-      background: rgba(255, 255, 255, 0.9);
-      box-shadow:
-        0 15px 50px rgba(0, 0, 0, 0.15),
-        inset 0 1px 0 0 rgba(255, 255, 255, 0.5),
-        inset 0 -1px 0 0 rgba(0, 0, 0, 0.08);
+  @media (max-width: 480px) {
+    .nav-content {
+      max-width: 240px;
+      padding: 0 2px;
+    }
+
+    .nav-list {
+      gap: 2px;
+    }
+
+    .nav-link {
+      padding: 5px 10px;
+      font-size: 9px;
+      letter-spacing: 0.3px;
     }
   }
 </style>

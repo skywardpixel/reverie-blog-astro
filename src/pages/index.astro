@@ -22,12 +22,12 @@ const posts = (await getCollection('blog'))
           <span class="title-line title-gradient">Skyward</span>
         </h1>
         <p class="hero-description">
-          Exploring technology, design, and development with a focus on
-          creating meaningful digital experiences and innovative solutions.
+          My personal space on the internet where I write about life, thoughts,
+          and whatever catches my interest along the way.
         </p>
         <div class="hero-actions">
           <a href="/blog" class="btn btn-primary">
-            <span>Explore Articles</span>
+            <span>Read My Posts</span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="5" y1="12" x2="19" y2="12"></line>
               <polyline points="12 5 19 12 12 19"></polyline>
@@ -49,8 +49,7 @@ const posts = (await getCollection('blog'))
   <section class="featured-posts">
     <div class="container">
       <div class="section-header">
-        <h2 class="section-title">Latest Articles</h2>
-        <p class="section-description">Recent insights on technology and design</p>
+        <h2 class="section-title">Recent Posts</h2>
       </div>
 
       <div class="posts-grid">
@@ -62,7 +61,7 @@ const posts = (await getCollection('blog'))
       {posts.length > 0 && (
         <div class="section-footer">
           <a href="/blog" class="view-all-link">
-            View all articles
+            View all posts
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="5" y1="12" x2="19" y2="12"></line>
               <polyline points="12 5 19 12 12 19"></polyline>
@@ -110,11 +109,12 @@ const posts = (await getCollection('blog'))
   }
 
   .title-gradient {
-    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 50%, var(--color-accent-light) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: gradient-shift 8s ease infinite;
+    background-size: 200% 200%;
   }
 
   @keyframes gradient-shift {
@@ -153,17 +153,17 @@ const posts = (await getCollection('blog'))
   }
 
   .btn-primary {
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.15));
+    background: rgba(124, 152, 133, 0.1);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(99, 102, 241, 0.3);
-    color: #6366f1;
+    border: 1px solid var(--color-accent);
+    color: var(--color-accent);
   }
 
   .btn-primary:hover {
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(139, 92, 246, 0.25));
-    border-color: rgba(99, 102, 241, 0.4);
+    background: rgba(124, 152, 133, 0.15);
+    border-color: var(--color-accent-light);
     transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
+    box-shadow: 0 10px 30px rgba(124, 152, 133, 0.2);
   }
 
   .btn-secondary {
@@ -203,7 +203,7 @@ const posts = (await getCollection('blog'))
     left: 10%;
     transform: rotate(-10deg) translateZ(50px);
     animation: float-1 20s ease-in-out infinite;
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.03), rgba(139, 92, 246, 0.03));
+    background: linear-gradient(135deg, rgba(124, 152, 133, 0.03), rgba(164, 184, 168, 0.03));
   }
 
   .card-2 {
@@ -213,7 +213,7 @@ const posts = (await getCollection('blog'))
     right: 10%;
     transform: rotate(5deg) translateZ(100px);
     animation: float-2 18s ease-in-out infinite;
-    background: linear-gradient(135deg, rgba(236, 72, 153, 0.03), rgba(99, 102, 241, 0.03));
+    background: linear-gradient(135deg, rgba(164, 184, 168, 0.03), rgba(124, 152, 133, 0.03));
   }
 
   .card-3 {
@@ -223,7 +223,7 @@ const posts = (await getCollection('blog'))
     left: 25%;
     transform: rotate(8deg) translateZ(75px);
     animation: float-3 22s ease-in-out infinite;
-    background: linear-gradient(135deg, rgba(167, 139, 250, 0.03), rgba(236, 72, 153, 0.03));
+    background: linear-gradient(135deg, rgba(124, 152, 133, 0.025), rgba(164, 184, 168, 0.02));
   }
 
   @keyframes float-1 {
@@ -268,7 +268,7 @@ const posts = (await getCollection('blog'))
     font-weight: 500;
     margin-bottom: 1rem;
     letter-spacing: -0.025em;
-    background: linear-gradient(135deg, #2c3e50 0%, #6366f1 100%);
+    background: linear-gradient(135deg, var(--color-text) 0%, var(--color-accent) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -283,8 +283,8 @@ const posts = (await getCollection('blog'))
   .posts-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem;
-    margin-bottom: 3rem;
+    gap: 1rem;
+    margin-bottom: 2rem;
   }
 
   .section-footer {
@@ -358,6 +358,7 @@ const posts = (await getCollection('blog'))
 
     .posts-grid {
       grid-template-columns: 1fr;
+      gap: 1rem;
     }
   }
 
