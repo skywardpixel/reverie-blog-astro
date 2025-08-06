@@ -136,9 +136,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   .hero-title {
+    font-family: var(--font-display);
     font-size: clamp(3rem, 8vw, 4.5rem);
-    font-weight: 700;
+    font-weight: 500;
     margin-bottom: 1rem;
+    letter-spacing: -0.03em;
     background: linear-gradient(135deg, #2c3e50 0%, #8b5cf6 100%);
     -webkit-background-clip: text;
     background-clip: text;
@@ -146,7 +148,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   .hero-subtitle {
+    font-family: var(--font-serif);
     font-size: 1.25rem;
+    line-height: 1.65;
     color: rgba(44, 62, 80, 0.8);
     max-width: 600px;
     margin: 0 auto;
@@ -180,8 +184,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   .main-content h2 {
+    font-family: var(--font-display);
     font-size: 2rem;
+    font-weight: 500;
     margin-bottom: 1.5rem;
+    letter-spacing: -0.025em;
     background: linear-gradient(135deg, rgba(44, 62, 80, 0.95) 0%, rgba(99, 102, 241, 0.95) 100%);
     -webkit-background-clip: text;
     background-clip: text;
@@ -189,16 +196,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   .main-content h3 {
+    font-family: var(--font-display);
     font-size: 1.5rem;
+    font-weight: 500;
     margin-top: 2.5rem;
     margin-bottom: 1rem;
+    letter-spacing: -0.02em;
     color: rgba(44, 62, 80, 0.9);
   }
 
   .main-content p {
-    line-height: 1.8;
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    line-height: 1.75;
     color: rgba(44, 62, 80, 0.8);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.75rem;
+    max-width: 70ch;
   }
 
   .main-content ul {
@@ -234,14 +247,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   .connect-card h3,
   .tech-card h3 {
+    font-family: var(--font-display);
     font-size: 1.25rem;
+    font-weight: 500;
     margin-bottom: 1rem;
+    letter-spacing: -0.015em;
     color: rgba(44, 62, 80, 0.9);
   }
 
   .connect-card p {
+    font-family: var(--font-serif);
     color: rgba(44, 62, 80, 0.7);
     margin-bottom: 1.5rem;
+    line-height: 1.6;
   }
 
   .social-links {
