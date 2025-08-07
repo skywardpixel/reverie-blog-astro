@@ -123,7 +123,7 @@ export interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-  activeTheme: 'softLavender', // Change this to switch themes
+  activeTheme: 'sageGreen', // Change this to switch themes
   allowThemeSwitching: false, // Set to true to enable theme switcher UI
 };
 
