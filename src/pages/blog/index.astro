@@ -209,8 +209,20 @@ const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
     background: var(--color-bg);
   }
 
+  @media (max-width: 768px) {
+    .blog-posts {
+      padding: 2rem 0 3rem;
+    }
+  }
+
   .year-section {
     margin-bottom: 4rem;
+  }
+
+  @media (max-width: 768px) {
+    .year-section {
+      margin-bottom: 2rem;
+    }
   }
 
   .year-title {
@@ -291,7 +303,7 @@ const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
 
   @media (max-width: 768px) {
     .blog-hero {
-      padding: 4rem 0 3rem;
+      padding: 2rem 0 1.5rem;
     }
 
     .hero-title {
@@ -304,11 +316,14 @@ const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
     }
 
     .stats-row {
-      gap: 1.5rem;
+      gap: 1rem;
+      margin-top: 2rem;
     }
 
     .stat-item {
-      padding: 1rem 1.5rem;
+      padding: 1rem 1.25rem;
+      width: 100px;
+      min-width: 100px;
     }
 
     .stat-number {
