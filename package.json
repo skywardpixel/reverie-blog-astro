@@ -6,6 +6,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "vercel-build": "astro build",
     "astro": "astro",
     "migrate": "node scripts/migrate-posts.js",
     "format": "prettier --write .",
