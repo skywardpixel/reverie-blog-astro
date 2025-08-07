@@ -6,28 +6,17 @@ const currentTheme = getCurrentTheme();
 
 <style
   is:global
-  define:vars={{
-    colorBg: currentTheme.colors.bg,
-    colorSurface: currentTheme.colors.surface,
-    colorText: currentTheme.colors.text,
-    colorTextSecondary: currentTheme.colors.textSecondary,
-    colorTextTertiary: currentTheme.colors.textTertiary,
-    colorAccent: currentTheme.colors.accent,
-    colorAccentLight: currentTheme.colors.accentLight,
-    colorBorder: currentTheme.colors.border,
-    colorBorderLight: currentTheme.colors.borderLight,
-  }}
->
+  set:html={`
   :root {
-    /* Theme colors directly from config */
-    --color-bg: var(--colorBg);
-    --color-surface: var(--colorSurface);
-    --color-text: var(--colorText);
-    --color-text-secondary: var(--colorTextSecondary);
-    --color-text-tertiary: var(--colorTextTertiary);
-    --color-accent: var(--colorAccent);
-    --color-accent-light: var(--colorAccentLight);
-    --color-border: var(--colorBorder);
-    --color-border-light: var(--colorBorderLight);
+    --color-bg: ${currentTheme.colors.bg};
+    --color-surface: ${currentTheme.colors.surface};
+    --color-text: ${currentTheme.colors.text};
+    --color-text-secondary: ${currentTheme.colors.textSecondary};
+    --color-text-tertiary: ${currentTheme.colors.textTertiary};
+    --color-accent: ${currentTheme.colors.accent};
+    --color-accent-light: ${currentTheme.colors.accentLight};
+    --color-border: ${currentTheme.colors.border};
+    --color-border-light: ${currentTheme.colors.borderLight};
   }
-</style>
+`}
+></style>
