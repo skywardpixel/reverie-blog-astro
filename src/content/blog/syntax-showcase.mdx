@@ -1,0 +1,109 @@
+---
+title: "MDX Syntax Showcase"
+description: "A quick tour through Markdown and MDX syntax possibilities."
+publishDate: "2023-10-26"
+updatedDate: "2023-10-27"
+tags: ["MDX", "syntax", "markdown", "guide"]
+---
+
+Welcome to a quick showcase of what MDX can do! This post demonstrates various Markdown and MDX syntax features you can use in your blog.
+
+## Headings
+
+You can easily create headings from H1 to H6.
+
+# This is an H1
+## This is an H2
+### This is an H3
+#### This is an H4
+##### This is an H5
+###### This is an H6
+
+## Paragraphs and Basic Text Formatting
+
+Here's a standard paragraph of text. You can use **bold** text, *italic* text, or even ***bold and italic*** text.
+
+You can also `highlight code inline` using backticks.
+
+## Lists
+
+### Unordered List
+
+- Item one
+- Item two
+  - Nested item A
+  - Nested item B
+- Item three
+
+### Ordered List
+
+1. First item
+2. Second item
+   1. Sub-item 1
+   2. Sub-item 2
+3. Third item
+
+## Code Blocks
+
+Code blocks are fantastic for displaying larger snippets of code.
+
+```javascript
+// Function to add two numbers
+function add(a, b) {
+  return a + b;
+}
+
+const result = add(5, 3);
+console.log(result); // Output: 8
+```
+
+```python
+# Python example
+def greet(name):
+    return f"Hello, {name}!"
+
+message = greet("MDX User")
+print(message)
+```
+
+## Blockquotes
+
+> "The only way to do great work is to love what you do."
+> — Steve Jobs
+
+> This is a multi-line blockquote.
+> It can span several lines and is great for highlighting important text or quotes.
+
+## Horizontal Rule
+
+***
+
+A horizontal rule can be used to separate content visually.
+
+---
+
+## Links
+
+Here's a [link to Astro](https://astro.build) and a [link to GitHub](https://github.com).
+
+## Images
+
+While we removed hero images, you can still embed images within your post content like this:
+
+```
+![A tranquil forest path.](/images/example-forest.jpg)
+```
+*(Note: I'm not actually creating the image file, this is just for demonstration purposes.)*
+
+## MDX in Action
+
+MDX allows you to embed JSX directly within your Markdown. For instance, if you had a custom React or Svelte component, you could import and use it here.
+
+```jsx
+import MyCustomComponent from '../components/MyCustomComponent.astro';
+
+<MyCustomComponent prop1="value" />
+```
+*(Note: No actual component is being imported or used in this static post for simplicity, but this is how you'd do it!)*
+
+This showcases the basic building blocks available in MDX. Enjoy writing your posts!
