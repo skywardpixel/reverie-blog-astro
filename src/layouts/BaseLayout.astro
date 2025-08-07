@@ -68,7 +68,11 @@ const canonicalURL = new URL(
     />
   </head>
 
-  <body>
+  <body
+    style={activeNav === 'home'
+      ? '--nav-spacing: 0px'
+      : '--nav-spacing: calc(var(--space-xl) + var(--space-xl))'}
+  >
     <ThemeProvider />
     <Navigation activeNav={activeNav} />
 
@@ -147,7 +151,10 @@ const canonicalURL = new URL(
     display: flex;
     flex-direction: column;
     position: relative;
-    padding-top: calc(var(--space-xl) + var(--space-xl));
+  }
+
+  .layout-container {
+    padding-top: var(--nav-spacing, calc(var(--space-xl) + var(--space-xl)));
   }
 
   .main-content {
@@ -205,8 +212,11 @@ const canonicalURL = new URL(
 
   @media (max-width: 640px) {
     .layout-container {
-      padding-top: calc(var(--space-xl) + var(--space-md));
       padding-bottom: 0;
+    }
+
+    .layout-container {
+      padding-top: var(--nav-spacing, calc(var(--space-xl) + var(--space-md)));
     }
 
     .footer-glass {
