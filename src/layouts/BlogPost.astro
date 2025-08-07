@@ -163,7 +163,7 @@ const formattedUpdatedDate = updatedDate
 
   .hero-content {
     position: relative;
-    padding: 4rem 0 2rem;
+    padding: 2.5rem 0 2rem;
   }
 
   .post-meta {
@@ -184,10 +184,32 @@ const formattedUpdatedDate = updatedDate
     font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 500;
     line-height: 1.1;
-    margin-bottom: 1.5rem;
-    color: var(--color-text);
+    margin-bottom: 0.75rem;
     font-family: var(--font-display);
     letter-spacing: -0.02em;
+    background: linear-gradient(
+      135deg,
+      var(--color-text) 0%,
+      var(--color-accent) 50%,
+      var(--color-accent-light) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-flow 6s ease infinite;
+    background-size: 200% 200%;
+  }
+
+  @keyframes gradient-flow {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
   }
 
   .post-description {
@@ -482,7 +504,7 @@ const formattedUpdatedDate = updatedDate
       display: none;
     }
 
-    .post-meta > span:not(:last-child):after {
+    .post-meta > *:not(:last-child):after {
       content: ' • ';
       color: var(--color-text-tertiary);
       margin-left: 0.5rem;
@@ -491,6 +513,16 @@ const formattedUpdatedDate = updatedDate
     .glass-content {
       padding: 1.5rem;
       border-radius: 6px;
+    }
+
+    .post-tags {
+      gap: 0.5rem;
+    }
+
+    .tag-glass {
+      padding: 0.25rem 0.75rem;
+      font-size: 0.75rem;
+      border-radius: 12px;
     }
 
     .post-title {
