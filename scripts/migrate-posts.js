@@ -40,10 +40,10 @@ function parseDate(dateStr) {
 
   // Try various date formats
   const formats = [
-    /^\d{4}-\d{2}-\d{2}$/,           // YYYY-MM-DD
-    /^\d{2}\/\d{2}\/\d{4}$/,         // MM/DD/YYYY
-    /^\d{4}\/\d{2}\/\d{2}$/,         // YYYY/MM/DD
-    /^\w+ \d{1,2}, \d{4}$/,          // Month DD, YYYY
+    /^\d{4}-\d{2}-\d{2}$/, // YYYY-MM-DD
+    /^\d{2}\/\d{2}\/\d{4}$/, // MM/DD/YYYY
+    /^\d{4}\/\d{2}\/\d{2}$/, // YYYY/MM/DD
+    /^\w+ \d{1,2}, \d{4}$/, // Month DD, YYYY
   ];
 
   const date = new Date(dateStr);
@@ -74,9 +74,23 @@ function extractTags(content, frontmatter) {
 
   // Common tech terms that might appear in content
   const techTerms = [
-    'javascript', 'typescript', 'react', 'vue', 'astro', 'css', 'html',
-    'nodejs', 'python', 'web development', 'frontend', 'backend',
-    'design', 'ui/ux', 'performance', 'accessibility', 'seo'
+    'javascript',
+    'typescript',
+    'react',
+    'vue',
+    'astro',
+    'css',
+    'html',
+    'nodejs',
+    'python',
+    'web development',
+    'frontend',
+    'backend',
+    'design',
+    'ui/ux',
+    'performance',
+    'accessibility',
+    'seo',
   ];
 
   const contentLower = content.toLowerCase();
@@ -119,9 +133,14 @@ async function convertMarkdownToMDX(filePath) {
     const { data: frontmatter, content: markdownContent } = matter(content);
 
     // Extract metadata
-    const title = frontmatter.title || path.basename(filePath, path.extname(filePath));
-    const publishDate = parseDate(frontmatter.date || frontmatter.publishDate || frontmatter.created);
-    const updatedDate = frontmatter.updated ? parseDate(frontmatter.updated) : null;
+    const title =
+      frontmatter.title || path.basename(filePath, path.extname(filePath));
+    const publishDate = parseDate(
+      frontmatter.date || frontmatter.publishDate || frontmatter.created
+    );
+    const updatedDate = frontmatter.updated
+      ? parseDate(frontmatter.updated)
+      : null;
     const description = generateDescription(markdownContent, frontmatter);
     const tags = extractTags(markdownContent, frontmatter);
     const slug = frontmatter.slug || slugify(title);
@@ -133,7 +152,8 @@ async function convertMarkdownToMDX(filePath) {
       publishDate: formatDate(publishDate),
       ...(updatedDate && { updatedDate: formatDate(updatedDate) }),
       ...(frontmatter.heroImage && { heroImage: frontmatter.heroImage }),
-      ...(frontmatter.image && !frontmatter.heroImage && { heroImage: frontmatter.image }),
+      ...(frontmatter.image &&
+        !frontmatter.heroImage && { heroImage: frontmatter.image }),
       tags,
       draft: frontmatter.draft || false,
     };
@@ -149,7 +169,10 @@ async function convertMarkdownToMDX(filePath) {
 
     // Add import statements for MDX components if needed
     let imports = '';
-    if (processedContent.includes('<Callout') || processedContent.includes(':::')) {
+    if (
+      processedContent.includes('<Callout') ||
+      processedContent.includes(':::')
+    ) {
       imports += "import Callout from '../../components/Callout.astro';\n";
     }
 
@@ -165,11 +188,10 @@ async function convertMarkdownToMDX(filePath) {
       '---',
       imports ? '\n' + imports : '',
       '',
-      processedContent
+      processedContent,
     ].join('\n');
 
     return { slug, content: finalContent, metadata: newFrontmatter };
-
   } catch (error) {
     console.error(`Error processing ${filePath}:`, error.message);
     return null;
@@ -205,7 +227,9 @@ async function findMarkdownFiles(dir) {
         // Recursively search subdirectories
         const subFiles = await findMarkdownFiles(fullPath);
         files.push(...subFiles);
-      } else if (config.supportedExtensions.includes(path.extname(entry.name))) {
+      } else if (
+        config.supportedExtensions.includes(path.extname(entry.name))
+      ) {
         files.push(fullPath);
       }
     }
@@ -282,7 +306,9 @@ Examples:
   }
 
   console.log('\n✨ Migration complete!');
-  console.log(`📊 Successfully migrated ${successCount} out of ${markdownFiles.length} files`);
+  console.log(
+    `📊 Successfully migrated ${successCount} out of ${markdownFiles.length} files`
+  );
 
   if (successCount > 0) {
     console.log('\n📋 Next steps:');
@@ -294,7 +320,7 @@ Examples:
 }
 
 // Handle uncaught errors
-process.on('unhandledRejection', (error) => {
+process.on('unhandledRejection', error => {
   console.error('❌ Unhandled error:', error);
   process.exit(1);
 });

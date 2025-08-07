@@ -5,6 +5,7 @@ This blog uses a powerful and flexible theme system that allows you to easily cu
 ## Overview
 
 The theme system is built with:
+
 - **TypeScript configuration** for type safety and intellisense
 - **CSS custom properties** for dynamic styling
 - **Astro integration** for seamless server-side rendering
@@ -13,32 +14,44 @@ The theme system is built with:
 ## Available Themes
 
 ### 🌿 Sage Green (Default)
+
 **Theme ID:** `sageGreen`
+
 - **Vibe:** Calming and natural, perfect for thoughtful writing
 - **Best for:** Personal blogs, mindfulness content, nature writing
 
 ### 🏺 Warm Terracotta
+
 **Theme ID:** `warmTerracotta`
+
 - **Vibe:** Earthy and cozy with Mediterranean warmth
 - **Best for:** Travel blogs, cooking content, lifestyle writing
 
 ### 🌸 Dusty Rose
+
 **Theme ID:** `dustyRose`
+
 - **Vibe:** Gentle and romantic with soft elegance
 - **Best for:** Creative writing, poetry, personal stories
 
 ### 🍯 Warm Honey
+
 **Theme ID:** `warmHoney`
+
 - **Vibe:** Golden and inviting with optimistic energy
 - **Best for:** Motivational content, business blogs, productivity
 
 ### 💜 Soft Lavender
+
 **Theme ID:** `softLavender`
+
 - **Vibe:** Creative and thoughtful with artistic flair
 - **Best for:** Art blogs, creative portfolios, design content
 
 ### 🌊 Warm Steel
+
 **Theme ID:** `warmSteel`
+
 - **Vibe:** Trustworthy and balanced with professional warmth
 - **Best for:** Technical blogs, professional content, tutorials
 
@@ -52,7 +65,7 @@ Edit the theme configuration file:
 // src/config/themes.ts
 export const siteConfig: SiteConfig = {
   activeTheme: 'warmTerracotta', // Change this to any theme ID
-  allowThemeSwitching: false,    // Enable user theme switching
+  allowThemeSwitching: false, // Enable user theme switching
 };
 ```
 
@@ -66,15 +79,15 @@ Each theme includes the following color properties:
 
 ```typescript
 interface ThemeColors {
-  bg: string;              // Main background color
-  surface: string;         // Card and surface backgrounds
-  text: string;            // Primary text color
-  textSecondary: string;   // Secondary text (less prominent)
-  textTertiary: string;    // Tertiary text (subtle)
-  accent: string;          // Primary accent color (links, buttons)
-  accentLight: string;     // Lighter accent variant
-  border: string;          // Border colors
-  borderLight: string;     // Light border variant
+  bg: string; // Main background color
+  surface: string; // Card and surface backgrounds
+  text: string; // Primary text color
+  textSecondary: string; // Secondary text (less prominent)
+  textTertiary: string; // Tertiary text (subtle)
+  accent: string; // Primary accent color (links, buttons)
+  accentLight: string; // Lighter accent variant
+  border: string; // Border colors
+  borderLight: string; // Light border variant
 }
 ```
 
@@ -87,7 +100,7 @@ Add a new theme to the `themes` object in `src/config/themes.ts`:
 ```typescript
 export const themes: Record<string, Theme> = {
   // ... existing themes
-  
+
   myCustomTheme: {
     name: 'myCustomTheme',
     displayName: 'My Custom Theme',
@@ -123,21 +136,25 @@ export const siteConfig: SiteConfig = {
 When creating themes, follow these guidelines:
 
 #### Color Harmony
+
 - Use harmonious color relationships (analogous, complementary, or triadic)
 - Maintain consistent saturation levels across colors
 - Ensure colors feel cohesive and intentional
 
 #### Accessibility
+
 - Text contrast ratio: minimum 4.5:1 for normal text, 3:1 for large text
 - Use tools like [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/)
 - Test with different vision types using accessibility tools
 
 #### Readability
+
 - Keep `bg` and `text` colors with high contrast
 - Use `textSecondary` for less important information
 - `textTertiary` should be subtle but still readable
 
 #### Brand Consistency
+
 - Reflect the personality and tone of your content
 - Consider your target audience and content type
 - Maintain visual hierarchy with accent colors
@@ -172,6 +189,7 @@ All components automatically use theme colors:
 ### Server-Side Rendering
 
 Themes are applied during build time, ensuring:
+
 - No flash of unstyled content (FOUC)
 - Better SEO and performance
 - Consistent styling across all pages
@@ -228,17 +246,20 @@ const incompleteTheme: Theme = {
 ## Best Practices
 
 ### Development
+
 1. **Test thoroughly**: View your content with each theme
 2. **Check accessibility**: Verify contrast ratios
 3. **Mobile testing**: Ensure themes work on all devices
 4. **Print styles**: Consider how themes appear when printed
 
 ### Content
+
 1. **Image coordination**: Choose images that work with your theme
 2. **Code highlighting**: Ensure code blocks remain readable
 3. **Link styling**: Verify links stand out appropriately
 
 ### Performance
+
 1. **Minimal overhead**: Theme switching adds minimal CSS
 2. **Build optimization**: Unused theme colors are tree-shaken
 3. **Caching**: Themes are cached with other CSS assets
@@ -246,16 +267,19 @@ const incompleteTheme: Theme = {
 ## Troubleshooting
 
 ### Colors Not Applying
+
 - Check theme name spelling in configuration
 - Verify CSS custom properties are being imported
 - Ensure ThemeProvider is included in BaseLayout
 
 ### TypeScript Errors
+
 - Make sure all required theme properties are defined
 - Check import paths for theme utilities
 - Verify interface implementations match
 
 ### Visual Issues
+
 - Clear browser cache after theme changes
 - Check for hardcoded colors in CSS
 - Verify component styles use CSS custom properties

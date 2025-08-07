@@ -1,11 +1,14 @@
 ---
 import { type CollectionEntry, getCollection } from 'astro:content';
 import BlogPost from '../../layouts/BlogPost.astro';
-import { calculateReadingTime, detectPrimaryLanguage } from '../../utils/reading-time';
+import {
+  calculateReadingTime,
+  detectPrimaryLanguage,
+} from '../../utils/reading-time';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-  return posts.map((post) => ({
+  return posts.map(post => ({
     params: { slug: post.slug },
     props: post,
   }));
@@ -22,7 +25,9 @@ const primaryLanguage = detectPrimaryLanguage(post.body);
 ---
 
 <BlogPost data={post.data} readingTime={readingTime}>
-  <div class={`post-content ${primaryLanguage === 'zh' ? 'lang-zh' : primaryLanguage === 'mixed' ? 'mixed-lang' : 'lang-en'}`}>
+  <div
+    class={`post-content ${primaryLanguage === 'zh' ? 'lang-zh' : primaryLanguage === 'mixed' ? 'mixed-lang' : 'lang-en'}`}
+  >
     <Content />
   </div>
 </BlogPost>

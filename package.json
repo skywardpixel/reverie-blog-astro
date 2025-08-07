@@ -7,7 +7,9 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "migrate": "node scripts/migrate-posts.js"
+    "migrate": "node scripts/migrate-posts.js",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "@astrojs/mdx": "^4.0.1",
@@ -19,6 +21,8 @@
   },
   "devDependencies": {
     "@types/node": "^20.10.5",
+    "prettier": "^3.6.2",
+    "prettier-plugin-astro": "^0.14.1",
     "typescript": "^5.3.3"
   }
 }

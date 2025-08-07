@@ -19,23 +19,26 @@ A minimalistic static blog built with Astro, featuring a modern liquid glass des
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - npm or yarn
 
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/yourusername/liquid-glass-blog.git
 cd liquid-glass-blog
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Start the development server:
+
 ```bash
 npm run dev
 ```
@@ -141,12 +144,12 @@ const navItems = [
 
 ### Commands
 
-| Command | Action |
-|---------|--------|
-| `npm run dev` | Start development server at `localhost:4321` |
-| `npm run build` | Build production site to `./dist/` |
-| `npm run preview` | Preview production build locally |
-| `npm run astro ...` | Run Astro CLI commands |
+| Command             | Action                                       |
+| ------------------- | -------------------------------------------- |
+| `npm run dev`       | Start development server at `localhost:4321` |
+| `npm run build`     | Build production site to `./dist/`           |
+| `npm run preview`   | Preview production build locally             |
+| `npm run astro ...` | Run Astro CLI commands                       |
 
 ### Adding New Features
 
@@ -158,11 +161,13 @@ const navItems = [
 ## 📦 Building for Production
 
 1. Build the site:
+
 ```bash
 npm run build
 ```
 
 2. Preview the production build:
+
 ```bash
 npm run preview
 ```
@@ -182,6 +187,7 @@ npm run preview
 ### GitHub Pages
 
 1. Update `astro.config.mjs`:
+
 ```javascript
 export default defineConfig({
   site: 'https://yourusername.github.io',
