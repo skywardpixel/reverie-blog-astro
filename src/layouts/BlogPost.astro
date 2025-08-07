@@ -158,17 +158,18 @@ const formattedUpdatedDate = updatedDate
 
   .hero-section {
     position: relative;
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
   }
 
   .hero-content {
     position: relative;
-    padding: 2rem 0;
+    padding: 4rem 0 2rem;
   }
 
   .post-meta {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: 0.75rem;
     font-size: 0.9rem;
     color: var(--color-text-secondary);
@@ -470,6 +471,24 @@ const formattedUpdatedDate = updatedDate
   }
 
   @media (max-width: 640px) {
+    .hero-content {
+      padding: 2rem 0 1.5rem;
+    }
+
+    .post-meta {
+      gap: 0.5rem;
+    }
+
+    .meta-separator {
+      display: none;
+    }
+
+    .post-meta > span:not(:last-child):after {
+      content: ' • ';
+      color: var(--color-text-tertiary);
+      margin-left: 0.5rem;
+    }
+
     .glass-content {
       padding: 1.5rem;
       border-radius: 6px;
