@@ -73,13 +73,6 @@ const canonicalURL = new URL(
     <Navigation activeNav={activeNav} />
 
     <div class="layout-container">
-      <div class="background-effects">
-        <div class="gradient-orb gradient-orb-1"></div>
-        <div class="gradient-orb gradient-orb-2"></div>
-        <div class="gradient-orb gradient-orb-3"></div>
-        <div class="noise-overlay"></div>
-      </div>
-
       <main class="main-content">
         <slot />
       </main>
@@ -157,76 +150,6 @@ const canonicalURL = new URL(
     padding-top: var(--space-md);
   }
 
-  .background-effects {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    pointer-events: none;
-    z-index: 0;
-    overflow: hidden;
-  }
-
-  .gradient-orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    animation: float 20s ease-in-out infinite;
-  }
-
-  .gradient-orb-1 {
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(
-      circle,
-      var(--color-accent) 0%,
-      transparent 70%
-    );
-    opacity: 0.02;
-    top: -200px;
-    left: -200px;
-    animation-delay: 0s;
-  }
-
-  .gradient-orb-2 {
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(
-      circle,
-      var(--color-accent-light) 0%,
-      transparent 70%
-    );
-    opacity: 0.015;
-    top: 50%;
-    right: -150px;
-    animation-delay: 7s;
-  }
-
-  .gradient-orb-3 {
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(
-      circle,
-      var(--color-accent) 0%,
-      transparent 70%
-    );
-    opacity: 0.01;
-    bottom: -100px;
-    left: 30%;
-    animation-delay: 14s;
-  }
-
-  .noise-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    opacity: 0.02;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  }
-
   .main-content {
     flex: 1;
     position: relative;
@@ -280,22 +203,6 @@ const canonicalURL = new URL(
     transform: translateY(-1px);
   }
 
-  @keyframes float {
-    0%,
-    100% {
-      transform: translate(0, 0) scale(1);
-    }
-    25% {
-      transform: translate(50px, -50px) scale(1.1);
-    }
-    50% {
-      transform: translate(-30px, 30px) scale(0.95);
-    }
-    75% {
-      transform: translate(30px, 50px) scale(1.05);
-    }
-  }
-
   @media (max-width: 640px) {
     .layout-container {
       padding-top: 0;
@@ -305,27 +212,6 @@ const canonicalURL = new URL(
     .footer-content {
       flex-direction: column;
       text-align: center;
-    }
-
-    .gradient-orb-1 {
-      width: 400px;
-      height: 400px;
-    }
-
-    .gradient-orb-2 {
-      width: 350px;
-      height: 350px;
-    }
-
-    .gradient-orb-3 {
-      width: 300px;
-      height: 300px;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .gradient-orb {
-      animation: none;
     }
   }
 </style>
