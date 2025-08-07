@@ -22,35 +22,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="container">
       <div class="content-wrapper">
         <div class="glass-card main-content">
-          <h2>Welcome to My Corner of the Internet</h2>
+          <h2>Welcome</h2>
           <p>
-            Hi there! This is my personal blog where I write about whatever's on
-            my mind. You'll find thoughts on life, reflections on experiences,
-            and stories about the things that interest me along the way.
+            This is my personal space where I share thoughts on life,
+            experiences, and whatever catches my interest. It's a simple blog
+            without a specific focus—just honest reflections and stories.
           </p>
-          <p>
-            This isn't a professional blog or a platform with a specific
-            focus—it's simply a place where I can share my thoughts and connect
-            with others who might find them interesting or relatable.
-          </p>
-          <h3>What You'll Find Here</h3>
+          <h3>What You'll Find</h3>
           <ul>
             <li>Personal reflections and life experiences</li>
-            <li>Thoughts on books, movies, music, and other interests</li>
-            <li>Stories from daily life and observations about the world</li>
-            <li>Updates on personal projects and goals</li>
-            <li>Random musings on topics that catch my attention</li>
-            <li>Honest thoughts about challenges and successes</li>
+            <li>Thoughts on books, movies, and music</li>
+            <li>Daily observations and random musings</li>
+            <li>Updates on projects and goals</li>
           </ul>
-          <h3>About This Site</h3>
           <p>
-            This blog is built with simplicity in mind—clean design, fast
-            loading, and a focus on readability. No distractions, just words and
-            thoughts shared in a comfortable digital space.
-          </p>
-          <p>
-            Thanks for stopping by and taking the time to read what I have to
-            share. Feel free to reach out if something resonates with you.
+            Thanks for stopping by. Feel free to reach out if something
+            resonates with you.
           </p>
         </div>
 
@@ -149,35 +136,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     text-align: center;
     position: relative;
     overflow: hidden;
-  }
-
-  .about-hero::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(
-      circle,
-      rgba(139, 92, 246, 0.05) 0%,
-      transparent 70%
-    );
-    filter: blur(60px);
-    animation: pulse 8s ease-in-out infinite;
-  }
-
-  @keyframes pulse {
-    0%,
-    100% {
-      opacity: 0.5;
-      transform: translateX(-50%) scale(1);
-    }
-    50% {
-      opacity: 1;
-      transform: translateX(-50%) scale(1.1);
-    }
+    background: var(--color-bg);
   }
 
   .hero-content {
@@ -189,16 +148,31 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-family: var(--font-display);
     font-size: clamp(3rem, 8vw, 4.5rem);
     font-weight: 500;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     letter-spacing: -0.03em;
     background: linear-gradient(
       135deg,
       var(--color-text) 0%,
-      var(--color-accent) 100%
+      var(--color-accent) 50%,
+      var(--color-accent-light) 100%
     );
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+    animation: gradient-flow 6s ease infinite;
+    background-size: 200% 200%;
+  }
+
+  @keyframes gradient-flow {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
   }
 
   .hero-subtitle {
@@ -290,7 +264,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     content: '';
     position: absolute;
     left: 0;
-    top: 0.5rem;
+    top: 0.65em;
     width: 6px;
     height: 6px;
     background: var(--color-accent);
@@ -376,7 +350,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   @media (max-width: 640px) {
     .about-hero {
-      padding: 4rem 0 3rem;
+      padding: 2rem 0 1.5rem;
     }
 
     .hero-title {
@@ -385,6 +359,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     .hero-subtitle {
       font-size: 1.1rem;
+    }
+
+    .about-content {
+      padding: 1.5rem 0 4rem;
     }
 
     .glass-card {
@@ -401,12 +379,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     .sidebar {
       grid-template-columns: 1fr;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .about-hero::before {
-      animation: none;
     }
   }
 </style>

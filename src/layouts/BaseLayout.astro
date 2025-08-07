@@ -147,7 +147,7 @@ const canonicalURL = new URL(
     display: flex;
     flex-direction: column;
     position: relative;
-    padding-top: var(--space-md);
+    padding-top: calc(var(--space-xl) + var(--space-xl));
   }
 
   .main-content {
@@ -205,13 +205,19 @@ const canonicalURL = new URL(
 
   @media (max-width: 640px) {
     .layout-container {
-      padding-top: 0;
+      padding-top: calc(var(--space-xl) + var(--space-md));
       padding-bottom: 0;
+    }
+
+    .footer-glass {
+      margin-top: var(--space-xl);
+      padding: var(--space-lg) 0;
     }
 
     .footer-content {
       flex-direction: column;
       text-align: center;
+      gap: var(--space-md);
     }
   }
 </style>

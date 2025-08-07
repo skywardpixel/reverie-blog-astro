@@ -129,24 +129,26 @@ const posts = (await getCollection('blog'))
   .title-gradient {
     background: linear-gradient(
       135deg,
-      var(--color-accent) 0%,
-      var(--color-accent-light) 50%,
+      var(--color-text) 0%,
+      var(--color-accent) 50%,
       var(--color-accent-light) 100%
     );
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: gradient-shift 8s ease infinite;
+    animation: gradient-flow 6s ease infinite;
     background-size: 200% 200%;
   }
 
-  @keyframes gradient-shift {
-    0%,
-    100% {
+  @keyframes gradient-flow {
+    0% {
       background-position: 0% 50%;
     }
     50% {
       background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
     }
   }
 
