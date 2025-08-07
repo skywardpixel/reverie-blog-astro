@@ -163,7 +163,7 @@ const formattedUpdatedDate = updatedDate
 
   .hero-content {
     position: relative;
-    padding: 3rem 0 2rem;
+    padding: 5rem 0 2rem;
   }
 
   .post-meta {
@@ -380,9 +380,15 @@ const formattedUpdatedDate = updatedDate
 
   /* TOC styles moved to global.css to work with JS-generated content */
 
+  @media (max-width: 768px) and (min-width: 641px) {
+    .hero-content {
+      padding: 2rem 0 1.75rem;
+    }
+  }
+
   @media (max-width: 640px) {
     .hero-content {
-      padding: 2rem 0 1.5rem;
+      padding: 1rem 0 1.5rem;
     }
 
     .post-meta {

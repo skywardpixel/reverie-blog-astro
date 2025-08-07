@@ -358,18 +358,27 @@ a:hover {
   text-decoration: none;
 }
 
-#toc-nav a.toc-h2 {
-  font-weight: 600;
-  font-size: 0.9rem;
+#toc-nav a.toc-h2:hover {
   color: var(--color-text);
-  padding-top: 0.3rem;
-  padding-bottom: 0.3rem;
-  margin-top: 0.1rem;
+  border-left-color: var(--color-accent);
+  background-color: rgba(var(--color-accent-rgb), 0.05);
+  transform: translateX(2px);
+}
+
+#toc-nav a.toc-h2 {
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--color-text);
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+  margin-top: 0.2rem;
+  letter-spacing: 0.01em;
+  border-left: 3px solid transparent;
 }
 
 #toc-nav a.toc-h3 {
-  padding-left: 1.5rem;
-  font-size: 0.8rem;
+  padding-left: 1.75rem;
+  font-size: 0.825rem;
   font-weight: 400;
   color: var(--color-text-tertiary);
   padding-top: 0.2rem;
