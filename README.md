@@ -94,12 +94,12 @@ And even import components:
 
 ### Changing the Active Theme
 
-Edit `src/config/themes.ts` to change the active theme:
+Edit `src/config/site.ts` to change the theme:
 
 ```javascript
-export const siteConfig: SiteConfig = {
-  activeTheme: 'softLavender', // Change to any theme name
-  allowThemeSwitching: false, // Set to true to enable theme switcher UI
+export const siteConfig = {
+  // ... other config
+  theme: 'softLavender', // Change to any theme name
 };
 ```
 
@@ -107,7 +107,7 @@ Available themes: `sageGreen`, `softLavender`, `warmTerracotta`, `dustyRose`, `w
 
 ### Creating Custom Themes
 
-Add new themes to the `themes` object in `src/config/themes.ts`:
+Add new themes to the `themes` object in `src/styles/themes.ts`:
 
 ```javascript
 customTheme: {
@@ -140,7 +140,7 @@ customTheme: {
 │   │   ├── Navigation.astro    # Site navigation
 │   │   └── ThemeProvider.astro # Theme system
 │   ├── config/
-│   │   └── themes.ts          # Theme configuration
+│   │   └── site.ts            # Site configuration
 │   ├── content/
 │   │   ├── blog/              # Blog posts in MDX
 │   │   └── config.ts          # Content collection config
@@ -231,6 +231,7 @@ Reverie is built for performance:
 - **Optimized Images** with Astro's built-in optimization
 - **Fast Navigation** with prefetching
 - **Small Bundle Size** - under 50KB of JavaScript
+- **Easy Customization** - Config-driven approach
 
 ## 📱 Browser Support
 

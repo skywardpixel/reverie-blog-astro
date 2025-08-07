@@ -1,0 +1,87 @@
+---
+import PageHero from './PageHero.astro';
+
+export interface Props {
+  title: string;
+  subtitle?: string;
+  heroClass?: string;
+  contentClass?: string;
+  hasSidebar?: boolean;
+}
+
+const {
+  title,
+  subtitle,
+  heroClass = '',
+  contentClass = '',
+  hasSidebar = false,
+} = Astro.props;
+---
+
+<PageHero title={title} subtitle={subtitle} className={heroClass} />
+
+<section class={`page-content ${contentClass}`}>
+  <div class="container">
+    <div
+      class={`content-wrapper ${hasSidebar ? 'content-wrapper--sidebar' : 'content-wrapper--single'}`}
+    >
+      <main class="main-content">
+        <slot name="main" />
+      </main>
+
+      {
+        hasSidebar && (
+          <aside class="sidebar">
+            <slot name="sidebar" />
+          </aside>
+        )
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .page-content {
+    padding: 4rem 0 6rem;
+  }
+
+  .content-wrapper--sidebar {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .content-wrapper--single {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  @media (max-width: 1024px) {
+    .content-wrapper--sidebar {
+      grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .page-content {
+      padding: 1.5rem 0 4rem;
+    }
+
+    .sidebar {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

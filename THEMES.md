@@ -62,10 +62,10 @@ The theme system is built with:
 Edit the theme configuration file:
 
 ```typescript
-// src/config/themes.ts
-export const siteConfig: SiteConfig = {
-  activeTheme: 'warmTerracotta', // Change this to any theme ID
-  allowThemeSwitching: false, // Enable user theme switching
+// src/config/site.ts
+export const siteConfig = {
+  // ... other config
+  theme: 'warmTerracotta', // Change this to any theme name
 };
 ```
 
@@ -95,7 +95,7 @@ interface ThemeColors {
 
 ### 1. Define Your Theme
 
-Add a new theme to the `themes` object in `src/config/themes.ts`:
+Add a new theme to the `themes` object in `src/styles/themes.ts`:
 
 ```typescript
 export const themes: Record<string, Theme> = {
@@ -125,9 +125,10 @@ export const themes: Record<string, Theme> = {
 Update the site configuration:
 
 ```typescript
-export const siteConfig: SiteConfig = {
-  activeTheme: 'myCustomTheme',
-  allowThemeSwitching: false,
+// Then update your site config in src/config/site.ts:
+export const siteConfig = {
+  // ... other config
+  theme: 'myCustomTheme',
 };
 ```
 
@@ -318,7 +319,7 @@ For questions or issues with the theme system:
 
 1. Check this documentation
 2. Review the theme showcase at `/themes`
-3. Examine the source code in `src/config/themes.ts`
+3. Examine the source code in `src/styles/themes.ts`
 4. Test with the default theme to isolate issues
 
 The theme system is designed to be flexible and extensible while maintaining simplicity for common use cases.

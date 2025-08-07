@@ -2,6 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BlogCard from '../components/BlogCard.astro';
 import { getCollection } from 'astro:content';
+import { format } from 'date-fns';
+import { getSiteTitle, getSiteDescription } from '../utils/config';
 
 const posts = (await getCollection('blog'))
   .filter(post => !post.data.draft)
@@ -10,8 +12,8 @@ const posts = (await getCollection('blog'))
 ---
 
 <BaseLayout
-  title="Reverie Blog - Home"
-  description="Thoughts on technology, design, and development with a modern perspective"
+  title={`${getSiteTitle()} - Home`}
+  description={getSiteDescription()}
   activeNav="home"
 >
   <section class="hero">
@@ -168,43 +170,7 @@ const posts = (await getCollection('blog'))
     flex-wrap: wrap;
   }
 
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.875rem 1.75rem;
-    border-radius: 16px;
-    font-weight: 500;
-    text-decoration: none;
-    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .btn-primary {
-    background: var(--color-accent);
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--color-accent);
-    color: var(--color-surface);
-  }
-
-  .btn-primary:hover {
-    background: var(--color-accent-light);
-    border-color: var(--color-accent-light);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px var(--color-accent);
-  }
-
-  .btn-secondary {
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: rgba(44, 62, 80, 0.9);
-  }
-
-  .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.8);
-    border-color: rgba(255, 255, 255, 0.4);
-    transform: translateY(-2px);
-  }
+  /* Buttons use unified system from global.css */
 
   .hero-visual {
     position: relative;
@@ -214,13 +180,10 @@ const posts = (await getCollection('blog'))
 
   .floating-card {
     position: absolute;
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 24px;
-    box-shadow:
-      0 20px 60px rgba(0, 0, 0, 0.1),
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   }
 
   .card-1 {
@@ -232,8 +195,8 @@ const posts = (await getCollection('blog'))
     animation: float-1 20s ease-in-out infinite;
     background: linear-gradient(
       135deg,
-      rgba(124, 152, 133, 0.03),
-      rgba(164, 184, 168, 0.03)
+      var(--color-bg-secondary),
+      var(--color-border-light)
     );
   }
 
@@ -246,8 +209,8 @@ const posts = (await getCollection('blog'))
     animation: float-2 18s ease-in-out infinite;
     background: linear-gradient(
       135deg,
-      rgba(164, 184, 168, 0.03),
-      rgba(124, 152, 133, 0.03)
+      var(--color-border-light),
+      var(--color-bg-secondary)
     );
   }
 
@@ -260,8 +223,8 @@ const posts = (await getCollection('blog'))
     animation: float-3 22s ease-in-out infinite;
     background: linear-gradient(
       135deg,
-      rgba(124, 152, 133, 0.025),
-      rgba(164, 184, 168, 0.02)
+      var(--color-bg-secondary),
+      var(--color-border-light)
     );
   }
 
@@ -342,21 +305,20 @@ const posts = (await getCollection('blog'))
     align-items: center;
     gap: 0.5rem;
     padding: 1rem 2rem;
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    border-radius: 8px;
     color: rgba(44, 62, 80, 0.9);
     text-decoration: none;
     font-weight: 500;
-    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 200ms ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   }
 
   .view-all-link:hover {
-    background: rgba(255, 255, 255, 0.8);
-    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.98);
     transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
   }
 
   @media (max-width: 1024px) {
@@ -393,10 +355,7 @@ const posts = (await getCollection('blog'))
       font-size: 1.1rem;
     }
 
-    .btn {
-      padding: 0.75rem 1.5rem;
-      font-size: 0.9rem;
-    }
+    /* Button responsive styles handled by unified system */
 
     .section-title {
       font-size: 2rem;

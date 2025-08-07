@@ -116,20 +116,12 @@ export const themes: Record<string, Theme> = {
   },
 };
 
-// Site configuration
-export interface SiteConfig {
-  activeTheme: keyof typeof themes;
-  allowThemeSwitching?: boolean;
-}
-
-export const siteConfig: SiteConfig = {
-  activeTheme: 'sageGreen', // Change this to switch themes
-  allowThemeSwitching: false, // Set to true to enable theme switcher UI
-};
+// Import site configuration
+import { siteConfig } from '../config/site';
 
 // Utility function to get current theme
 export function getCurrentTheme(): Theme {
-  return themes[siteConfig.activeTheme];
+  return themes[siteConfig.theme];
 }
 
 // Utility function to get all available themes

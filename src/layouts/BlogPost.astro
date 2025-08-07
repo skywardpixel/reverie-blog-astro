@@ -49,7 +49,7 @@ const formattedUpdatedDate = updatedDate
             tags.length > 0 && (
               <div class="post-tags">
                 {tags.map(tag => (
-                  <span class="tag-glass">{tag}</span>
+                  <span class="btn-link">{tag}</span>
                 ))}
               </div>
             )
@@ -60,23 +60,23 @@ const formattedUpdatedDate = updatedDate
 
     <div class="container">
       <div class="post-content-wrapper">
-        <div class="post-content glass-content prose">
+        <div class="post-content content">
           <slot />
         </div>
 
         <aside class="post-sidebar">
-          <div class="toc-glass">
+          <div class="toc-card">
             <h3>Table of Contents</h3>
             <nav class="toc-nav" id="toc-nav">
               <!-- TOC will be generated via JavaScript -->
             </nav>
           </div>
 
-          <div class="share-glass">
+          <div class="share-card">
             <h3>Share</h3>
             <div class="share-buttons">
               <button
-                class="share-btn"
+                class="btn-social-icon"
                 data-share="twitter"
                 aria-label="Share on Twitter"
               >
@@ -97,7 +97,7 @@ const formattedUpdatedDate = updatedDate
               </button>
 
               <button
-                class="share-btn"
+                class="btn-social-icon"
                 data-share="copy"
                 aria-label="Copy link"
               >
@@ -190,26 +190,11 @@ const formattedUpdatedDate = updatedDate
     background: linear-gradient(
       135deg,
       var(--color-text) 0%,
-      var(--color-accent) 50%,
-      var(--color-accent-light) 100%
+      var(--color-accent) 100%
     );
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: gradient-flow 6s ease infinite;
-    background-size: 200% 200%;
-  }
-
-  @keyframes gradient-flow {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
   }
 
   .post-description {
@@ -226,24 +211,7 @@ const formattedUpdatedDate = updatedDate
     gap: 0.75rem;
   }
 
-  .tag-glass {
-    padding: 0.5rem 1rem;
-    background: var(--color-border-light);
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--color-border);
-    border-radius: 16px;
-    font-size: 0.875rem;
-    color: var(--color-text-secondary);
-    font-weight: 500;
-    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
-    font-family: var(--font-serif);
-  }
-
-  .tag-glass:hover {
-    background: var(--color-accent-light);
-    border-color: var(--color-accent);
-    transform: translateY(-2px);
-  }
+  /* Tags use unified btn-link class */
 
   .post-content-wrapper {
     display: grid;
@@ -256,80 +224,47 @@ const formattedUpdatedDate = updatedDate
     min-width: 0;
   }
 
-  .glass-content {
-    background: #ffffff;
-    border: 1px solid var(--color-border);
-    border-radius: 8px;
+  .content {
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    border-radius: 16px;
     padding: 2rem;
     font-family: var(--font-body);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     position: relative;
   }
 
-  .glass-content::before {
+  .content::before {
     display: none;
   }
 
-  /* Post content styles */
-  .post-content :global(h2) {
-    font-family: var(--font-display);
-    margin-top: 3rem;
-    margin-bottom: 1.5rem;
-    letter-spacing: -0.025em;
-  }
+  /* Heading styles now handled by global content system */
 
-  .post-content :global(h3) {
-    font-family: var(--font-display);
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    letter-spacing: -0.02em;
-  }
+  /* Paragraph and list styles now handled by global content system */
 
-  .post-content :global(p) {
-    font-family: var(--font-body);
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-    color: var(--color-text);
-    max-width: 70ch;
-  }
+  /* List styles now handled by global content system */
 
-  .post-content :global(ul),
-  .post-content :global(ol) {
-    margin-bottom: 1.5rem;
-    padding-left: 2rem;
-    color: var(--color-text);
-  }
+  /* Blockquote and code styles now handled by global content system */
 
-  .post-content :global(li) {
-    margin-bottom: 0.5rem;
-    line-height: 1.6;
-    font-family: var(--font-body);
-  }
-
-  .post-content :global(blockquote) {
-    font-family: var(--font-body);
-    font-style: italic;
-    font-size: 1rem;
-    margin: 1.5rem 0;
-    padding: 1rem 1.5rem;
-    background: rgba(124, 152, 133, 0.03);
-    border-left: 3px solid var(--color-accent);
-    border-radius: 4px;
-    line-height: 1.6;
-    color: var(--color-text-secondary);
-    position: relative;
-  }
-
-  .post-content :global(blockquote::before) {
-    display: none;
+  .post-content :global(hr) {
+    border: none;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--color-border),
+      transparent
+    );
+    margin: 3rem auto;
+    max-width: 300px;
   }
 
   .post-content :global(img) {
     width: 100%;
     height: auto;
     border-radius: 8px;
-    margin: 1.5rem 0;
+    margin: 2rem 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   }
 
   .post-content :global(a) {
@@ -345,6 +280,16 @@ const formattedUpdatedDate = updatedDate
     text-decoration-thickness: 2px;
   }
 
+  .post-content :global(strong) {
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .post-content :global(em) {
+    font-style: italic;
+    color: var(--color-text-secondary);
+  }
+
   /* Sidebar */
   .post-sidebar {
     position: sticky;
@@ -352,23 +297,23 @@ const formattedUpdatedDate = updatedDate
     height: fit-content;
   }
 
-  .toc-glass,
-  .share-glass {
-    background: #ffffff;
-    border: 1px solid var(--color-border);
-    border-radius: 8px;
+  .toc-card,
+  .share-card {
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    border-radius: 16px;
     padding: 1.5rem;
     margin-bottom: 1.5rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   }
 
-  .toc-glass h3,
-  .share-glass h3 {
-    font-size: 1rem;
+  .toc-card h3,
+  .share-card h3 {
+    font-size: 1.25rem;
     margin-bottom: 1rem;
     color: var(--color-text);
     font-family: var(--font-display);
-    font-weight: 500;
+    font-weight: 600;
   }
 
   .toc-nav {
@@ -382,26 +327,7 @@ const formattedUpdatedDate = updatedDate
     gap: 0.75rem;
   }
 
-  .share-btn {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(124, 152, 133, 0.05);
-    border: 1px solid rgba(124, 152, 133, 0.15);
-    border-radius: 12px;
-    color: var(--color-text-secondary);
-    cursor: pointer;
-    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .share-btn:hover {
-    background: rgba(124, 152, 133, 0.12);
-    border-color: rgba(124, 152, 133, 0.25);
-    color: var(--color-accent);
-    transform: translateY(-2px);
-  }
+  /* Share buttons use unified btn-social-icon class */
 
   /* Post Navigation */
   .post-navigation {
@@ -419,21 +345,20 @@ const formattedUpdatedDate = updatedDate
     align-items: center;
     gap: 0.75rem;
     padding: 0.75rem 1.25rem;
-    background: #ffffff;
-    border: 1px solid var(--color-border);
-    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    border-radius: 8px;
     color: var(--color-text);
     text-decoration: none;
     transition: all 200ms ease;
     font-family: var(--font-body);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   }
 
   .nav-link:hover {
-    background: var(--color-bg);
-    border-color: var(--color-accent);
+    background: rgba(255, 255, 255, 0.98);
     transform: translateX(-2px);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
   }
 
   /* Mobile styles */
@@ -448,48 +373,12 @@ const formattedUpdatedDate = updatedDate
   }
 
   /* Table of Contents Styles - Override global link styles */
-  .toc-glass {
+  .toc-card {
     --local-link-color: var(--color-text-secondary);
     --local-link-decoration: none;
   }
 
-  .toc-glass * {
-    text-decoration: var(--local-link-decoration) !important;
-    text-decoration-line: none !important;
-    text-underline-offset: unset !important;
-    text-decoration-thickness: 0px !important;
-    border-bottom: none !important;
-  }
-
-  .toc-glass a {
-    display: block;
-    padding: 0.5rem 0;
-    color: var(--local-link-color);
-    text-decoration: var(--local-link-decoration) !important;
-    transition: color 200ms;
-    border-left: 2px solid transparent;
-    padding-left: 1rem;
-    font-family: var(--font-body);
-    font-size: 0.9rem;
-    border-bottom: none !important;
-    text-underline-offset: unset !important;
-    text-decoration-line: none !important;
-    text-decoration-style: unset !important;
-    text-decoration-thickness: 0px !important;
-  }
-
-  .toc-glass a:hover {
-    color: var(--color-text);
-    border-left-color: var(--color-accent);
-    text-decoration: none !important;
-    text-decoration-line: none !important;
-    border-bottom: none !important;
-  }
-
-  .toc-glass .toc-h3 {
-    padding-left: 2rem;
-    font-size: 0.875rem;
-  }
+  /* TOC styles moved to global.css to work with JS-generated content */
 
   @media (max-width: 640px) {
     .hero-content {
@@ -510,20 +399,16 @@ const formattedUpdatedDate = updatedDate
       margin-left: 0.5rem;
     }
 
-    .glass-content {
+    .content {
       padding: 1.5rem;
-      border-radius: 6px;
+      border-radius: 12px;
     }
 
     .post-tags {
       gap: 0.5rem;
     }
 
-    .tag-glass {
-      padding: 0.25rem 0.75rem;
-      font-size: 0.75rem;
-      border-radius: 12px;
-    }
+    /* Tag responsive styles handled by unified btn-link class */
 
     .post-title {
       font-size: 2rem;
@@ -531,6 +416,16 @@ const formattedUpdatedDate = updatedDate
 
     .post-description {
       font-size: 1.1rem;
+    }
+
+    /* Mobile scroll margin maintained for content */
+    .content h1,
+    .content h2,
+    .content h3,
+    .content h4,
+    .content h5,
+    .content h6 {
+      scroll-margin-top: calc(var(--space-2xl) + var(--space-lg) + 1rem);
     }
   }
 </style>
@@ -555,8 +450,13 @@ const formattedUpdatedDate = updatedDate
           const link = document.createElement('a');
           link.href = `#${heading.id}`;
           link.textContent = heading.textContent;
-          link.className =
-            heading.tagName === 'H2' ? 'toc-link toc-h2' : 'toc-link toc-h3';
+
+          // Apply classes based on heading type
+          if (heading.tagName === 'H2') {
+            link.classList.add('toc-link', 'toc-h2');
+          } else {
+            link.classList.add('toc-link', 'toc-h3');
+          }
 
           tocNav.appendChild(link);
         });
@@ -566,7 +466,9 @@ const formattedUpdatedDate = updatedDate
 
   // Share functionality
   document.addEventListener('DOMContentLoaded', () => {
-    const shareButtons = document.querySelectorAll('.share-btn');
+    const shareButtons = document.querySelectorAll(
+      '.btn-social-icon[data-share]'
+    );
     const pageUrl = window.location.href;
     const pageTitle = document.querySelector('.post-title')?.textContent || '';
 

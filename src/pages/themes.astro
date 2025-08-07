@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getAllThemes, getCurrentTheme } from '../config/themes';
+import { getAllThemes, getCurrentTheme } from '../styles/themes';
 
 const allThemes = getAllThemes();
 const currentTheme = getCurrentTheme();
@@ -8,7 +8,7 @@ const currentTheme = getCurrentTheme();
 
 <BaseLayout
   title="Theme Showcase"
-  description="Explore all available color themes for Reverie blog"
+  description="Explore all available color themes for your blog"
   activeNav="about"
 >
   <div class="theme-showcase">
@@ -16,14 +16,10 @@ const currentTheme = getCurrentTheme();
       <div class="hero-section">
         <h1>Theme Showcase</h1>
         <p class="hero-description">
-          Explore the different color themes available for this blog. Each theme
-          is carefully crafted to provide a unique personality while maintaining
+          This blog uses the <strong>{currentTheme.displayName}</strong> theme. Each
+          theme is carefully crafted to provide a unique personality while maintaining
           excellent readability.
         </p>
-        <div class="current-theme-indicator">
-          <span class="theme-label">Current Theme:</span>
-          <span class="theme-name">{currentTheme.displayName}</span>
-        </div>
       </div>
 
       <div class="themes-grid">
@@ -86,7 +82,9 @@ const currentTheme = getCurrentTheme();
                 <p class="theme-description">{theme.description}</p>
                 <div class="theme-meta">
                   <span class="theme-status">
-                    {theme.name === currentTheme.name ? 'Active' : 'Available'}
+                    {theme.name === currentTheme.name
+                      ? 'Current'
+                      : 'Alternative'}
                   </span>
                 </div>
               </div>
@@ -98,11 +96,11 @@ const currentTheme = getCurrentTheme();
       <div class="configuration-section">
         <h2>How to Change Themes</h2>
         <div class="config-guide">
-          <p>To change the active theme, edit the configuration file:</p>
-          <pre><code>{`// src/config/themes.ts
-export const siteConfig: SiteConfig = {
-  activeTheme: 'warmTerracotta', // Change this value
-  allowThemeSwitching: false,
+          <p>To change the theme, edit the configuration file and redeploy:</p>
+          <pre><code>{`// src/config/site.ts
+export const siteConfig = {
+  // ... other config
+  theme: 'warmTerracotta', // Change this value
 };`}</code></pre>
           <p>Available theme options:</p>
           <ul class="theme-list">
@@ -173,27 +171,6 @@ export const siteConfig: SiteConfig = {
     margin: 0 auto var(--space-xl) auto;
   }
 
-  .current-theme-indicator {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-sm);
-    padding: var(--space-md) var(--space-lg);
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
-  }
-
-  .theme-label {
-    color: var(--color-text-secondary);
-    font-size: var(--text-sm);
-  }
-
-  .theme-name {
-    color: var(--color-accent);
-    font-weight: 500;
-  }
-
   .themes-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -211,7 +188,6 @@ export const siteConfig: SiteConfig = {
   }
 
   .theme-card:hover {
-    transform: translateY(-4px);
     box-shadow: var(--shadow-lg);
     border-color: var(--color-accent);
   }

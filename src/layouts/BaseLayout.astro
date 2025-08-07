@@ -1,10 +1,18 @@
 ---
 import Navigation from '../components/Navigation.astro';
 import ThemeProvider from '../components/ThemeProvider.astro';
+import {
+  getSiteTitle,
+  getSiteDescription,
+  getDefaultOgImage,
+  getSiteUrl,
+  showRssLink,
+  getSocialLinks,
+} from '../utils/config';
 import '../styles/global.css';
 
 export interface Props {
-  title: string;
+  title?: string;
   description?: string;
   image?: string;
   activeNav?: 'home' | 'blog' | 'about';
@@ -12,15 +20,16 @@ export interface Props {
 
 const {
   title,
-  description = 'Reverie - Personal thoughts, stories, and life reflections',
-  image = '/og-image.png',
+  description = getSiteDescription(),
+  image = getDefaultOgImage(),
   activeNav = 'home',
 } = Astro.props;
 
-const canonicalURL = new URL(
-  Astro.url.pathname,
-  Astro.site || 'https://example.com'
-);
+const pageTitle = title ? `${title} - ${getSiteTitle()}` : getSiteTitle();
+const siteUrl = getSiteUrl();
+const socialLinks = getSocialLinks();
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || siteUrl);
 ---
 
 <!doctype html>
@@ -31,28 +40,25 @@ const canonicalURL = new URL(
     <meta name="generator" content={Astro.generator} />
 
     <!-- SEO -->
-    <title>{title}</title>
+    <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
-    <meta property="og:title" content={title} />
+    <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
-    <meta
-      property="og:image"
-      content={new URL(image, Astro.site || 'https://example.com')}
-    />
+    <meta property="og:image" content={new URL(image, Astro.site || siteUrl)} />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={canonicalURL} />
-    <meta property="twitter:title" content={title} />
+    <meta property="twitter:title" content={pageTitle} />
     <meta property="twitter:description" content={description} />
     <meta
       property="twitter:image"
-      content={new URL(image, Astro.site || 'https://example.com')}
+      content={new URL(image, Astro.site || siteUrl)}
     />
 
     <!-- Favicon -->
@@ -71,7 +77,7 @@ const canonicalURL = new URL(
   <body
     style={activeNav === 'home'
       ? '--nav-spacing: 0px'
-      : '--nav-spacing: calc(var(--space-xl) + var(--space-xl))'}
+      : '--nav-spacing: calc(var(--space-2xl) + var(--space-xl))'}
   >
     <ThemeProvider />
     <Navigation activeNav={activeNav} />
@@ -81,31 +87,43 @@ const canonicalURL = new URL(
         <slot />
       </main>
 
-      <footer class="footer-glass">
+      <footer class="footer">
         <div class="container">
           <div class="footer-content">
             <p>
-              &copy; {new Date().getFullYear()} Reverie. A personal blog built with
-              care.
+              &copy; {new Date().getFullYear()}
+              {getSiteTitle()}. A personal blog built with care.
             </p>
             <div class="footer-links">
-              <a href="/rss.xml" aria-label="RSS Feed">
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M4 11a9 9 0 0 1 9 9"></path>
-                  <path d="M4 4a16 16 0 0 1 16 16"></path>
-                  <circle cx="5" cy="19" r="1"></circle>
-                </svg>
-              </a>
-              <a href="https://github.com" aria-label="GitHub">
+              {
+                showRssLink() && (
+                  <a
+                    href="/rss.xml"
+                    class="btn-social-icon"
+                    aria-label="RSS Feed"
+                  >
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M4 11a9 9 0 0 1 9 9" />
+                      <path d="M4 4a16 16 0 0 1 16 16" />
+                      <circle cx="5" cy="19" r="1" />
+                    </svg>
+                  </a>
+                )
+              }
+              <a
+                href={socialLinks.github}
+                class="btn-social-icon"
+                aria-label="GitHub"
+              >
                 <svg
                   width="20"
                   height="20"
@@ -121,7 +139,11 @@ const canonicalURL = new URL(
                   ></path>
                 </svg>
               </a>
-              <a href="https://twitter.com" aria-label="Twitter">
+              <a
+                href={socialLinks.twitter}
+                class="btn-social-icon"
+                aria-label="Twitter"
+              >
                 <svg
                   width="20"
                   height="20"
@@ -163,52 +185,43 @@ const canonicalURL = new URL(
     z-index: 10;
   }
 
-  .footer-glass {
+  .footer {
     position: relative;
     z-index: 10;
-    margin-top: var(--space-3xl);
-    padding: var(--space-2xl) 0;
-    background: var(--color-surface);
-    border-top: 1px solid var(--color-border);
+    margin-top: 4rem;
+    padding: 3rem 0;
+    background: rgba(255, 255, 255, 0.95);
+    border-top: none;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    min-height: 120px;
   }
 
   .footer-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: var(--space-2xl);
+    gap: 3rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
   }
 
   .footer-content p {
     color: var(--color-text-secondary);
     margin: 0;
-    font-size: var(--text-sm);
+    font-size: 0.875rem;
+    line-height: 1.5;
   }
 
   .footer-links {
     display: flex;
-    gap: var(--space-md);
+    gap: 1rem;
+    flex-shrink: 0;
   }
 
-  .footer-links a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    background: var(--color-border-light);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
-    color: var(--color-text-secondary);
-    transition: all var(--transition);
-  }
-
-  .footer-links a:hover {
-    background: var(--color-surface);
-    border-color: var(--color-accent);
-    color: var(--color-accent);
-    transform: translateY(-1px);
-  }
+  /* Footer links use unified btn-social-icon class */
 
   @media (max-width: 640px) {
     .layout-container {
@@ -216,18 +229,20 @@ const canonicalURL = new URL(
     }
 
     .layout-container {
-      padding-top: var(--nav-spacing, calc(var(--space-xl) + var(--space-md)));
+      padding-top: var(--nav-spacing, calc(var(--space-2xl) + var(--space-lg)));
     }
 
-    .footer-glass {
-      margin-top: var(--space-xl);
-      padding: var(--space-lg) 0;
+    .footer {
+      margin-top: 0;
+      padding: 1.5rem 0;
+      min-height: 100px;
     }
 
     .footer-content {
       flex-direction: column;
       text-align: center;
-      gap: var(--space-md);
+      gap: 1rem;
+      padding: 0 1rem;
     }
   }
 </style>
