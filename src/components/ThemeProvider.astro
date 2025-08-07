@@ -1,23 +1,33 @@
 ---
-import { getCurrentTheme, generateThemeCSS } from '../config/themes';
+import { getCurrentTheme } from '../config/themes';
 
 const currentTheme = getCurrentTheme();
-const themeCSS = generateThemeCSS(currentTheme);
 ---
 
-<style is:global define:vars={{ themeCSS }}>
+<style
+  is:global
+  define:vars={{
+    colorBg: currentTheme.colors.bg,
+    colorSurface: currentTheme.colors.surface,
+    colorText: currentTheme.colors.text,
+    colorTextSecondary: currentTheme.colors.textSecondary,
+    colorTextTertiary: currentTheme.colors.textTertiary,
+    colorAccent: currentTheme.colors.accent,
+    colorAccentLight: currentTheme.colors.accentLight,
+    colorBorder: currentTheme.colors.border,
+    colorBorderLight: currentTheme.colors.borderLight,
+  }}
+>
   :root {
-    /* Theme colors injected from config */
-    --color-bg: var(--theme-bg, #faf8f5);
-    --color-surface: var(--theme-surface, #ffffff);
-    --color-text: var(--theme-text, #2d342f);
-    --color-text-secondary: var(--theme-text-secondary, #6b7a6f);
-    --color-text-tertiary: var(--theme-text-tertiary, #8a9a8f);
-    --color-accent: var(--theme-accent, #7c9885);
-    --color-accent-light: var(--theme-accent-light, #a4b8a8);
-    --color-border: var(--theme-border, #d4e0d7);
-    --color-border-light: var(--theme-border-light, #e8f0eb);
+    /* Theme colors directly from config */
+    --color-bg: var(--colorBg);
+    --color-surface: var(--colorSurface);
+    --color-text: var(--colorText);
+    --color-text-secondary: var(--colorTextSecondary);
+    --color-text-tertiary: var(--colorTextTertiary);
+    --color-accent: var(--colorAccent);
+    --color-accent-light: var(--colorAccentLight);
+    --color-border: var(--colorBorder);
+    --color-border-light: var(--colorBorderLight);
   }
 </style>
-
-<style is:inline set:html={`:root { ${themeCSS} }`}></style>
