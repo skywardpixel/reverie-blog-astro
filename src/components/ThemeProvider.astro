@@ -1,0 +1,23 @@
+---
+import { getCurrentTheme, generateThemeCSS } from '../config/themes';
+
+const currentTheme = getCurrentTheme();
+const themeCSS = generateThemeCSS(currentTheme);
+---
+
+<style is:global define:vars={{ themeCSS }}>
+  :root {
+    /* Theme colors injected from config */
+    --color-bg: var(--theme-bg, #faf8f5);
+    --color-surface: var(--theme-surface, #ffffff);
+    --color-text: var(--theme-text, #2d342f);
+    --color-text-secondary: var(--theme-text-secondary, #6b7a6f);
+    --color-text-tertiary: var(--theme-text-tertiary, #8a9a8f);
+    --color-accent: var(--theme-accent, #7c9885);
+    --color-accent-light: var(--theme-accent-light, #a4b8a8);
+    --color-border: var(--theme-border, #d4e0d7);
+    --color-border-light: var(--theme-border-light, #e8f0eb);
+  }
+</style>
+
+<style is:inline set:html={`:root { ${themeCSS} }`}></style>

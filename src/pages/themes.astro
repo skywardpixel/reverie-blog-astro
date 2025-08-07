@@ -1,0 +1,393 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getAllThemes, getCurrentTheme } from "../config/themes";
+
+const allThemes = getAllThemes();
+const currentTheme = getCurrentTheme();
+---
+
+<BaseLayout
+    title="Theme Showcase"
+    description="Explore all available color themes for Skyward blog"
+    activeNav="about"
+>
+    <div class="theme-showcase">
+        <div class="container">
+            <div class="hero-section">
+                <h1>Theme Showcase</h1>
+                <p class="hero-description">
+                    Explore the different color themes available for this blog.
+                    Each theme is carefully crafted to provide a unique
+                    personality while maintaining excellent readability.
+                </p>
+                <div class="current-theme-indicator">
+                    <span class="theme-label">Current Theme:</span>
+                    <span class="theme-name">{currentTheme.displayName}</span>
+                </div>
+            </div>
+
+            <div class="themes-grid">
+                {
+                    allThemes.map((theme) => (
+                        <div class="theme-card" data-theme={theme.name}>
+                            <div class="theme-preview">
+                                <div class="theme-colors">
+                                    <div
+                                        class="color-swatch"
+                                        style={`background-color: ${theme.colors.accent}`}
+                                        title="Accent Color"
+                                    />
+                                    <div
+                                        class="color-swatch"
+                                        style={`background-color: ${theme.colors.accentLight}`}
+                                        title="Accent Light"
+                                    />
+                                    <div
+                                        class="color-swatch"
+                                        style={`background-color: ${theme.colors.text}`}
+                                        title="Text Color"
+                                    />
+                                    <div
+                                        class="color-swatch"
+                                        style={`background-color: ${theme.colors.bg}`}
+                                        title="Background"
+                                    />
+                                </div>
+                                <div
+                                    class="theme-content-preview"
+                                    style={`
+                background: ${theme.colors.bg};
+                color: ${theme.colors.text};
+                border: 1px solid ${theme.colors.border};
+              `}
+                                >
+                                    <h3 style={`color: ${theme.colors.text}`}>
+                                        Sample Heading
+                                    </h3>
+                                    <p
+                                        style={`color: ${theme.colors.textSecondary}`}
+                                    >
+                                        This is a sample paragraph to show how
+                                        content looks with this theme.
+                                    </p>
+                                    <a
+                                        href="#"
+                                        style={`color: ${theme.colors.accent}`}
+                                    >
+                                        Sample Link
+                                    </a>
+                                    <div
+                                        class="sample-tag"
+                                        style={`
+                  background: ${theme.colors.accent}20;
+                  color: ${theme.colors.accent};
+                  border: 1px solid ${theme.colors.accent}40;
+                `}
+                                    >
+                                        Tag
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="theme-info">
+                                <h3 class="theme-title">{theme.displayName}</h3>
+                                <p class="theme-description">
+                                    {theme.description}
+                                </p>
+                                <div class="theme-meta">
+                                    <span class="theme-status">
+                                        {theme.name === currentTheme.name
+                                            ? "Active"
+                                            : "Available"}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+
+            <div class="configuration-section">
+                <h2>How to Change Themes</h2>
+                <div class="config-guide">
+                    <p>
+                        To change the active theme, edit the configuration file:
+                    </p>
+                    <pre><code>{`// src/config/themes.ts
+export const siteConfig: SiteConfig = {
+  activeTheme: 'warmTerracotta', // Change this value
+  allowThemeSwitching: false,
+};`}</code></pre>
+                    <p>Available theme options:</p>
+                    <ul class="theme-list">
+                        {
+                            allThemes.map((theme) => (
+                                <li>
+                                    <code>{theme.name}</code> -{" "}
+                                    {theme.displayName}
+                                </li>
+                            ))
+                        }
+                    </ul>
+                </div>
+            </div>
+
+            <div class="theme-details">
+                <h2>Theme System Details</h2>
+                <div class="details-grid">
+                    <div class="detail-card">
+                        <h3>🎨 Design Philosophy</h3>
+                        <p>
+                            Each theme is designed with warm, personal tones
+                            that create an inviting atmosphere for readers while
+                            maintaining excellent contrast ratios for
+                            accessibility.
+                        </p>
+                    </div>
+                    <div class="detail-card">
+                        <h3>🔧 Implementation</h3>
+                        <p>
+                            Themes use CSS custom properties that are
+                            dynamically injected based on your configuration,
+                            ensuring consistent styling across all components.
+                        </p>
+                    </div>
+                    <div class="detail-card">
+                        <h3>📱 Responsive</h3>
+                        <p>
+                            All themes are fully responsive and tested across
+                            different devices and screen sizes to ensure a great
+                            experience everywhere.
+                        </p>
+                    </div>
+                    <div class="detail-card">
+                        <h3>♿ Accessible</h3>
+                        <p>
+                            Color combinations meet WCAG accessibility
+                            guidelines with proper contrast ratios for text
+                            readability and UI elements.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</BaseLayout>
+
+<style>
+    .theme-showcase {
+        padding: var(--space-3xl) 0;
+    }
+
+    .hero-section {
+        text-align: center;
+        margin-bottom: var(--space-3xl);
+    }
+
+    .hero-description {
+        font-size: var(--text-lg);
+        color: var(--color-text-secondary);
+        max-width: 600px;
+        margin: 0 auto var(--space-xl) auto;
+    }
+
+    .current-theme-indicator {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-sm);
+        padding: var(--space-md) var(--space-lg);
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .theme-label {
+        color: var(--color-text-secondary);
+        font-size: var(--text-sm);
+    }
+
+    .theme-name {
+        color: var(--color-accent);
+        font-weight: 500;
+    }
+
+    .themes-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: var(--space-2xl);
+        margin-bottom: var(--space-3xl);
+    }
+
+    .theme-card {
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        transition: all var(--transition);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .theme-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-lg);
+        border-color: var(--color-accent);
+    }
+
+    .theme-preview {
+        padding: var(--space-lg);
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .theme-colors {
+        display: flex;
+        gap: var(--space-sm);
+        margin-bottom: var(--space-lg);
+    }
+
+    .color-swatch {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        border: 2px solid var(--color-border);
+        cursor: help;
+    }
+
+    .theme-content-preview {
+        padding: var(--space-lg);
+        border-radius: var(--radius-md);
+        font-size: var(--text-sm);
+    }
+
+    .theme-content-preview h3 {
+        margin: 0 0 var(--space-sm) 0;
+        font-size: var(--text-base);
+    }
+
+    .theme-content-preview p {
+        margin: 0 0 var(--space-sm) 0;
+        font-size: var(--text-sm);
+        line-height: 1.4;
+    }
+
+    .theme-content-preview a {
+        text-decoration: underline;
+        font-size: var(--text-sm);
+    }
+
+    .sample-tag {
+        display: inline-block;
+        padding: 0.25rem 0.5rem;
+        border-radius: var(--radius-sm);
+        font-size: var(--text-xs);
+        font-weight: 500;
+        margin-top: var(--space-sm);
+    }
+
+    .theme-info {
+        padding: var(--space-lg);
+    }
+
+    .theme-title {
+        margin: 0 0 var(--space-sm) 0;
+        color: var(--color-text);
+        font-size: var(--text-lg);
+    }
+
+    .theme-description {
+        margin: 0 0 var(--space-md) 0;
+        color: var(--color-text-secondary);
+        font-size: var(--text-sm);
+        line-height: 1.5;
+    }
+
+    .theme-status {
+        font-size: var(--text-xs);
+        font-weight: 500;
+        padding: 0.25rem 0.5rem;
+        background: var(--color-accent);
+        color: var(--color-surface);
+        border-radius: var(--radius-sm);
+    }
+
+    .configuration-section {
+        margin-bottom: var(--space-3xl);
+        padding: var(--space-2xl);
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-lg);
+    }
+
+    .config-guide pre {
+        margin: var(--space-lg) 0;
+        background: var(--color-bg);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        padding: var(--space-lg);
+        overflow-x: auto;
+    }
+
+    .theme-list {
+        list-style: none;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--space-sm);
+    }
+
+    .theme-list li {
+        padding: var(--space-sm);
+        background: var(--color-bg);
+        border-radius: var(--radius-sm);
+        border: 1px solid var(--color-border);
+    }
+
+    .theme-list code {
+        color: var(--color-accent);
+        font-weight: 500;
+    }
+
+    .theme-details {
+        margin-bottom: var(--space-3xl);
+    }
+
+    .details-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--space-xl);
+        margin-top: var(--space-xl);
+    }
+
+    .detail-card {
+        padding: var(--space-xl);
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .detail-card h3 {
+        margin: 0 0 var(--space-md) 0;
+        color: var(--color-text);
+        font-size: var(--text-lg);
+    }
+
+    .detail-card p {
+        margin: 0;
+        color: var(--color-text-secondary);
+        line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+        .themes-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .details-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .theme-list {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
