@@ -246,7 +246,7 @@ async function main() {
   // Parse command line arguments
   if (args.includes('--help') || args.includes('-h')) {
     console.log(`
-Migration Script for Skyward Blog
+Migration Script for Reverie Blog
 Usage: node scripts/migrate-posts.js [options]
 
 Options:

@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://skyward.blog',
+  site: 'https://reverie.blog',
   integrations: [mdx(), sitemap()],
   markdown: {
     shikiConfig: {

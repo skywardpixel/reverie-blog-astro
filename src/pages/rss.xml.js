@@ -12,25 +12,25 @@ export async function GET(context) {
     );
 
   return rss({
-    title: 'Skyward Blog',
+    title: 'Reverie Blog',
     description:
       'Personal thoughts, stories, and reflections from my life and experiences.',
-    site: context.site || 'https://skyward-blog.netlify.app',
+    site: context.site || 'https://reverie-blog.netlify.app',
     items: publishedPosts.map(post => ({
       title: post.data.title,
       pubDate: post.data.publishDate,
       description: post.data.description,
       link: `/blog/${post.slug}/`,
       categories: post.data.tags || [],
-      author: 'Skyward Blog',
+      author: 'Reverie Blog',
       customData: post.data.updatedDate
         ? `<lastBuildDate>${post.data.updatedDate.toUTCString()}</lastBuildDate>`
         : undefined,
     })),
     customData: `
       <language>en-us</language>
-      <managingEditor>hello@skyward-blog.com</managingEditor>
-      <webMaster>hello@skyward-blog.com</webMaster>
+      <managingEditor>hello@reverie-blog.com</managingEditor>
+      <webMaster>hello@reverie-blog.com</webMaster>
       <docs>https://www.rssboard.org/rss-specification</docs>
       <generator>Astro v${process.env.npm_package_version || '5.0.0'}</generator>
       <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
