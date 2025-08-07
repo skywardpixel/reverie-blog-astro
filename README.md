@@ -1,34 +1,45 @@
-# Liquid Glass Blog - Astro
+# Reverie - Elegant Astro Blog Template
 
-A minimalistic static blog built with Astro, featuring a modern liquid glass design inspired by iOS. This blog uses MDX for content, allowing rich components within markdown files.
+A thoughtful, minimalist blog template built with Astro, featuring multiple beautiful themes and a focus on readability and personal expression. Perfect for writers, developers, and creatives who want an elegant online presence.
 
-![Liquid Glass Design](https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&h=400&fit=crop)
+![Reverie Blog Template](https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=400&fit=crop)
 
 ## ✨ Features
 
-- **Liquid Glass Design**: Modern glassmorphism effects with backdrop filters and subtle animations
-- **iOS-Inspired Navigation**: Floating navigation bar with smooth transitions
-- **MDX Support**: Write blog posts with components inside markdown
-- **Dark Theme**: Optimized for dark environments with elegant transparency effects
-- **Responsive**: Fully responsive design that works on all devices
-- **Performance First**: Built with Astro for blazing-fast performance
-- **Type-Safe**: TypeScript support with content collections
-- **SEO Ready**: Meta tags, Open Graph, and sitemap generation
+- **🎨 Multiple Themes**: Six carefully crafted color themes to match your personality
+- **📝 MDX Support**: Write blog posts with components inside markdown
+- **📱 Fully Responsive**: Beautiful on desktop, tablet, and mobile devices
+- **⚡ Blazing Fast**: Built with Astro for optimal performance
+- **🔍 SEO Optimized**: Meta tags, Open Graph, sitemap, and RSS feed
+- **♿ Accessible**: WCAG compliant with proper contrast and semantic HTML
+- **🎯 Reading-Focused**: Clean typography and distraction-free reading experience
+- **📊 Reading Time**: Automatic reading time calculation
+- **🏷️ Tag System**: Organize posts with tags that adapt to your theme
+- **🔗 Social Sharing**: Built-in sharing buttons for social platforms
+
+## 🎨 Available Themes
+
+- **Sage Green**: Calming and natural, perfect for thoughtful writing
+- **Soft Lavender**: Creative and thoughtful with artistic flair
+- **Warm Terracotta**: Earthy and cozy with Mediterranean warmth
+- **Dusty Rose**: Gentle and romantic with soft elegance
+- **Warm Honey**: Golden and inviting with optimistic energy
+- **Warm Steel**: Trustworthy and balanced with professional warmth
 
 ## 🚀 Quick Start
 
 ### Prerequisites
 
 - Node.js 18+
-- npm or yarn
+- npm, yarn, or pnpm
 
 ### Installation
 
-1. Clone the repository:
+1. Clone or download the template:
 
 ```bash
-git clone https://github.com/yourusername/liquid-glass-blog.git
-cd liquid-glass-blog
+git clone https://github.com/yourusername/reverie-blog-template.git
+cd reverie-blog-template
 ```
 
 2. Install dependencies:
@@ -54,12 +65,19 @@ Blog posts are written in MDX format and stored in `src/content/blog/`. Each pos
 title: 'Your Post Title'
 description: 'A brief description of your post'
 publishDate: 2024-01-15
+updatedDate: 2024-01-20
 heroImage: 'https://example.com/image.jpg'
-tags: ['tag1', 'tag2']
+tags: ['writing', 'thoughts', 'life']
 draft: false
 ---
 
-Your content here...
+Your content here with full MDX support...
+
+## You can use markdown
+
+And even import components:
+
+<CustomComponent />
 ```
 
 ### Frontmatter Fields
@@ -67,74 +85,81 @@ Your content here...
 - `title` (required): The title of your blog post
 - `description` (required): A brief description for SEO and previews
 - `publishDate` (required): Publication date (YYYY-MM-DD format)
+- `updatedDate` (optional): Last update date
 - `heroImage` (optional): Hero image URL for the post
 - `tags` (optional): Array of tags for categorization
 - `draft` (optional): Set to `true` to hide the post from production
-- `updatedDate` (optional): Last update date
 
-## 🎨 Customization
+## 🎨 Customizing Your Theme
 
-### Colors
+### Changing the Active Theme
 
-Edit the CSS variables in `src/styles/global.css`:
-
-```css
-:root {
-  --color-bg: #0a0a0f;
-  --color-text: #e4e4e7;
-  --color-accent: #60a5fa;
-  /* ... more variables */
-}
-```
-
-### Glass Effects
-
-Adjust the glass effect intensity:
-
-```css
-.glass {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-```
-
-### Navigation
-
-The navigation items can be modified in `src/components/Navigation.astro`:
+Edit `src/config/themes.ts` to change the active theme:
 
 ```javascript
-const navItems = [
-  { name: 'Home', href: '/', id: 'home' },
-  { name: 'Blog', href: '/blog', id: 'blog' },
-  { name: 'About', href: '/about', id: 'about' },
-];
+export const siteConfig: SiteConfig = {
+  activeTheme: 'softLavender', // Change to any theme name
+  allowThemeSwitching: false, // Set to true to enable theme switcher UI
+};
+```
+
+Available themes: `sageGreen`, `softLavender`, `warmTerracotta`, `dustyRose`, `warmHoney`, `warmSteel`
+
+### Creating Custom Themes
+
+Add new themes to the `themes` object in `src/config/themes.ts`:
+
+```javascript
+customTheme: {
+  name: 'customTheme',
+  displayName: 'Custom Theme',
+  description: 'Your custom theme description',
+  colors: {
+    bg: '#your-bg-color',
+    surface: '#your-surface-color',
+    text: '#your-text-color',
+    textSecondary: '#your-secondary-text',
+    textTertiary: '#your-tertiary-text',
+    accent: '#your-accent-color',
+    accentLight: '#your-light-accent',
+    border: '#your-border-color',
+    borderLight: '#your-light-border',
+  },
+},
 ```
 
 ## 🏗️ Project Structure
 
 ```
 ├── public/
-│   └── favicon.svg
+│   ├── favicon.svg
+│   └── og-image.png
 ├── src/
 │   ├── components/
 │   │   ├── BlogCard.astro      # Blog post card component
-│   │   └── Navigation.astro    # iOS-style navigation bar
+│   │   ├── Navigation.astro    # Site navigation
+│   │   └── ThemeProvider.astro # Theme system
+│   ├── config/
+│   │   └── themes.ts          # Theme configuration
 │   ├── content/
-│   │   ├── blog/               # Blog posts in MDX
+│   │   ├── blog/              # Blog posts in MDX
 │   │   └── config.ts          # Content collection config
 │   ├── layouts/
-│   │   ├── BaseLayout.astro   # Base layout with nav and footer
+│   │   ├── BaseLayout.astro   # Base layout with theme
 │   │   └── BlogPost.astro     # Blog post layout
 │   ├── pages/
 │   │   ├── blog/
 │   │   │   ├── [...slug].astro # Dynamic blog post pages
 │   │   │   └── index.astro     # Blog listing page
 │   │   ├── about.astro         # About page
-│   │   └── index.astro         # Home page
+│   │   ├── index.astro         # Home page
+│   │   ├── rss.xml.js         # RSS feed
+│   │   └── themes.astro       # Theme showcase
 │   ├── styles/
-│   │   └── global.css          # Global styles and glass effects
-│   └── env.d.ts               # TypeScript declarations
+│   │   └── global.css         # Global styles and design system
+│   ├── utils/
+│   │   └── reading-time.ts    # Reading time calculation
+│   └── env.d.ts              # TypeScript declarations
 ├── astro.config.mjs           # Astro configuration
 ├── package.json
 └── tsconfig.json
@@ -142,21 +167,23 @@ const navItems = [
 
 ## 🛠️ Development
 
-### Commands
+### Available Commands
 
-| Command             | Action                                       |
-| ------------------- | -------------------------------------------- |
-| `npm run dev`       | Start development server at `localhost:4321` |
-| `npm run build`     | Build production site to `./dist/`           |
-| `npm run preview`   | Preview production build locally             |
-| `npm run astro ...` | Run Astro CLI commands                       |
+| Command                | Action                                       |
+| ---------------------- | -------------------------------------------- |
+| `npm run dev`          | Start development server at `localhost:4321` |
+| `npm run build`        | Build production site to `./dist/`           |
+| `npm run preview`      | Preview production build locally             |
+| `npm run format`       | Format all files with Prettier               |
+| `npm run format:check` | Check if files need formatting               |
 
-### Adding New Features
+### Code Quality
 
-1. **Components**: Add new components to `src/components/`
-2. **Pages**: Add new pages to `src/pages/`
-3. **Layouts**: Create new layouts in `src/layouts/`
-4. **Styles**: Global styles go in `src/styles/global.css`
+Reverie includes:
+
+- **Prettier** for consistent code formatting
+- **TypeScript** for type safety
+- **ESLint-ready** structure for linting
 
 ## 📦 Building for Production
 
@@ -186,35 +213,41 @@ npm run preview
 
 ### GitHub Pages
 
-1. Update `astro.config.mjs`:
+Update `astro.config.mjs` with your site details:
 
 ```javascript
 export default defineConfig({
   site: 'https://yourusername.github.io',
-  base: '/repo-name',
-  // ... rest of config
+  base: '/your-repo-name', // Only needed for repo deployments
 });
 ```
 
-2. Use GitHub Actions for automatic deployment
-
 ## 🎯 Performance
 
-This blog achieves excellent performance metrics:
+Reverie is built for performance:
 
-- **Lighthouse Score**: 100/100
-- **First Contentful Paint**: < 0.8s
-- **Time to Interactive**: < 1.5s
-- **Bundle Size**: < 50KB JavaScript
+- **100/100 Lighthouse Score** achievable
+- **Minimal JavaScript** - mostly static HTML/CSS
+- **Optimized Images** with Astro's built-in optimization
+- **Fast Navigation** with prefetching
+- **Small Bundle Size** - under 50KB of JavaScript
+
+## 📱 Browser Support
+
+- ✅ Chrome (latest)
+- ✅ Firefox (latest)
+- ✅ Safari (latest)
+- ✅ Edge (latest)
+- ✅ Mobile browsers
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Feel free to:
 
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
 ## 📄 License
@@ -223,17 +256,22 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 🙏 Acknowledgments
 
-- Design inspired by iOS glass morphism
-- Built with [Astro](https://astro.build)
+- Built with [Astro](https://astro.build) - The web framework for content-driven websites
+- Typography inspired by Medium and Ghost
+- Color palettes designed for accessibility and beauty
 - Icons from [Feather Icons](https://feathericons.com)
-- Sample images from [Unsplash](https://unsplash.com)
 
-## 📧 Contact
+## 💬 Support
 
-Your Name - [@yourusername](https://twitter.com/yourusername)
+If you find this template helpful, please consider:
 
-Project Link: [https://github.com/yourusername/liquid-glass-blog](https://github.com/yourusername/liquid-glass-blog)
+- ⭐ Starring the repository
+- 🐛 Reporting bugs via GitHub Issues
+- 💡 Suggesting features via GitHub Discussions
+- 📝 Writing about your experience using Reverie
 
 ---
 
-Built with ❤️ using Astro and liquid glass design
+**Reverie** - _A thoughtful space for your words_
+
+Built with ❤️ for writers, creators, and dreamers.
