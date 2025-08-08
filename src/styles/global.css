@@ -26,14 +26,21 @@
 
   /* Typography System */
   --font-family:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, 'Noto Sans SC',
-    'PingFang SC', sans-serif;
+    'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'PingFang SC',
+    'Microsoft YaHei', 'Segoe UI', system-ui, sans-serif;
   --font-display:
-    'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui,
-    sans-serif;
+    'DM Sans', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'PingFang SC',
+    'Microsoft YaHei', 'Segoe UI', system-ui, sans-serif;
+  --font-serif:
+    'Merriweather', 'Noto Serif SC', 'Songti SC', 'SimSun', Georgia,
+    'Times New Roman', serif;
+  --font-serif-weight: 500;
+  --font-body:
+    'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'PingFang SC',
+    'Microsoft YaHei', 'Segoe UI', system-ui, sans-serif;
   --font-mono:
-    'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New',
-    monospace;
+    'JetBrains Mono', 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono',
+    Consolas, 'Courier New', monospace;
 
   /* Font Sizes */
   --text-xs: 0.75rem; /* 12px */
@@ -68,6 +75,21 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'kern' 1;
+}
+
+/* Chinese text rendering optimizations */
+html:lang(zh),
+html:lang(zh-CN),
+html:lang(zh-TW),
+html:lang(zh-HK) {
+  font-feature-settings:
+    'kern' 1,
+    'liga' 1;
+  word-break: break-word;
+  word-wrap: break-word;
+  line-break: strict;
 }
 
 body {
@@ -191,6 +213,17 @@ p {
   margin: 0 0 var(--space-xl) 0;
   max-width: 65ch;
   color: var(--color-text);
+  text-align: justify;
+  text-justify: inter-ideograph;
+}
+
+/* Better spacing for Chinese content */
+.content p:lang(zh),
+.content p:lang(zh-CN),
+.content p:lang(zh-TW),
+.content p:lang(zh-HK) {
+  line-height: 1.8;
+  text-align: left;
 }
 
 .content ul,
@@ -247,9 +280,10 @@ p {
 }
 
 .content blockquote {
-  font-family: var(--font-family);
+  font-family: var(--font-serif);
   font-style: italic;
   font-size: 1.05rem;
+  font-weight: var(--font-serif-weight, 500);
   margin: var(--space-3xl) 0;
   padding: var(--space-lg) var(--space-xl);
   background: transparent;
@@ -258,6 +292,30 @@ p {
   color: var(--color-text-secondary);
   position: relative;
   max-width: 65ch;
+}
+
+/* Chinese blockquotes don't use italic */
+.content blockquote:lang(zh),
+.content blockquote:lang(zh-CN),
+.content blockquote:lang(zh-TW),
+.content blockquote:lang(zh-HK) {
+  font-style: normal;
+}
+
+/* Improve Chinese text readability */
+*[class*='description'] {
+  font-family: var(--font-serif);
+  font-weight: var(--font-serif-weight, 500);
+}
+
+/* Use sans-serif for Chinese descriptions for better readability */
+*[class*='description']:lang(zh),
+*[class*='description']:lang(zh-CN),
+*[class*='description']:lang(zh-TW),
+*[class*='description']:lang(zh-HK) {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.7;
 }
 
 .content blockquote p {
@@ -297,6 +355,57 @@ p {
   padding: 0;
   color: inherit;
   font-size: 0.875rem;
+}
+
+.content table {
+  width: 100%;
+  margin: var(--space-2xl) 0;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  max-width: 65ch;
+}
+
+.content th,
+.content td {
+  padding: var(--space-md) var(--space-lg);
+  text-align: left;
+  border-bottom: 1px solid var(--color-border-light);
+  font-size: 0.95rem;
+  line-height: var(--leading-normal);
+}
+
+.content th {
+  background: var(--color-bg);
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--color-text);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid var(--color-border);
+}
+
+.content td {
+  color: var(--color-text);
+  font-family: var(--font-body);
+}
+
+.content tbody tr:hover {
+  background: rgba(var(--color-accent-rgb), 0.04);
+}
+
+.content tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.content table code {
+  font-size: 0.85rem;
+  padding: 0.125rem 0.25rem;
 }
 
 a {
@@ -468,6 +577,21 @@ code {
   .content pre {
     padding: 1rem;
     margin: 1.5rem 0;
+    font-size: 0.8rem;
+  }
+
+  .content table {
+    font-size: 0.875rem;
+    margin: var(--space-xl) 0;
+  }
+
+  .content th,
+  .content td {
+    padding: var(--space-sm) var(--space-md);
+    font-size: 0.875rem;
+  }
+
+  .content th {
     font-size: 0.8rem;
   }
 

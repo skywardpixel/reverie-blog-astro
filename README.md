@@ -13,6 +13,7 @@ A thoughtful, minimalist blog template built with Astro, featuring multiple beau
 - **🔍 SEO Optimized**: Meta tags, Open Graph, sitemap, and RSS feed
 - **♿ Accessible**: WCAG compliant with proper contrast and semantic HTML
 - **🎯 Reading-Focused**: Clean typography and distraction-free reading experience
+- **🌏 Chinese Typography**: Full support for Chinese content with optimized fonts and layout
 - **📊 Reading Time**: Automatic reading time calculation
 - **🏷️ Tag System**: Organize posts with tags that adapt to your theme
 - **🔗 Social Sharing**: Built-in sharing buttons for social platforms
