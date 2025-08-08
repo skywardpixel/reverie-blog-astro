@@ -2,6 +2,9 @@
 // These are UI labels, navigation items, and system messages that should be
 // translated automatically based on the site language setting.
 
+// Language is now set in site config - this imports it dynamically
+import { siteConfig } from '../config/site';
+
 export const ui = {
   en: {
     // Navigation
@@ -39,6 +42,11 @@ export const ui = {
     sampleText:
       'This is a sample paragraph to show how content looks with this theme.',
     sampleLink: 'Sample Link',
+
+    // About page UI labels
+    letsConnect: "Let's Connect",
+    findMeOn: 'Find me on these platforms:',
+    builtWith: 'Built With',
 
     // Reading & time
     readingTime: 'min read',
@@ -103,11 +111,16 @@ export const ui = {
     sampleText: '这是一个示例段落，展示此主题下内容的显示效果。',
     sampleLink: '示例链接',
 
+    // About page UI labels
+    letsConnect: '联系我',
+    findMeOn: '在这些平台找到我：',
+    builtWith: '技术栈',
+
     // Reading & time
     readingTime: '分钟阅读',
     readingTimePrefix: '约',
     readingTimeSuffix: '分钟阅读',
-    yearsWriting: '年写作',
+    yearsWriting: '年<br />写作',
 
     // Navigation actions
     backToHome: '返回首页',
@@ -137,4 +150,9 @@ export type UIKey = keyof typeof ui.en;
 // Utility function to get translations
 export function getUITranslation(language: Language, key: UIKey): string {
   return ui[language][key];
+}
+
+// Get current site language from config
+export function getCurrentLanguage(): Language {
+  return siteConfig.language;
 }

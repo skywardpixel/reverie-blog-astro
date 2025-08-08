@@ -3,44 +3,47 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PageLayout from '../components/PageLayout.astro';
 import Card from '../components/Card.astro';
 import SocialLinks from '../components/SocialLinks.astro';
-import { getSiteTitle, t, getContent } from '../utils/config';
+import { getSiteTitle, t, siteConfig } from '../utils/config';
 ---
 
 <BaseLayout
   title={t('about')}
-  description={`${getContent('aboutMetaDescription')} - ${getSiteTitle()}`}
+  description={`Learn more about me and this personal blog - ${getSiteTitle()}`}
   activeNav="about"
 >
   <PageLayout
     title={t('about')}
-    subtitle={getContent('aboutSubtitle')}
+    subtitle={siteConfig.aboutSubtitle}
     hasSidebar={true}
   >
     <Card slot="main" hover={false}>
-      <h2>{getContent('welcomeTitle')}</h2>
+      <h2>Welcome</h2>
       <p>
-        {getContent('aboutContent')}
+        This is my personal space where I share thoughts on life, experiences,
+        and whatever catches my interest. It's a simple blog without a specific
+        focus—just honest reflections and stories.
       </p>
-      <h3>{getContent('whatYouFind')}</h3>
+      <h3>What You'll Find</h3>
       <ul>
-        <li>{getContent('aboutList1')}</li>
-        <li>{getContent('aboutList2')}</li>
-        <li>{getContent('aboutList3')}</li>
-        <li>{getContent('aboutList4')}</li>
+        <li>Personal reflections and life experiences</li>
+        <li>Thoughts on books, movies, and music</li>
+        <li>Daily observations and random musings</li>
+        <li>Updates on projects and goals</li>
       </ul>
       <p>
-        {getContent('thankYou')}
+        Thanks for stopping by. Feel free to reach out if something resonates
+        with you.
       </p>
     </Card>
 
     <Card slot="sidebar" className="connect-card" hover={false}>
-      <h3>{getContent('letsConnect')}</h3>
-      <p>{getContent('findMeOn')}</p>
+      <h3>{t('letsConnect')}</h3>
+      <p>{t('findMeOn')}</p>
       <SocialLinks />
     </Card>
 
     <Card slot="sidebar" className="tech-card" hover={false}>
-      <h3>{getContent('builtWith')}</h3>
+      <h3>{t('builtWith')}</h3>
       <div class="tech-list">
         <span class="btn-link">Astro</span>
         <span class="btn-link">MDX</span>

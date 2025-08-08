@@ -1,5 +1,4 @@
-import { getUITranslation } from '../i18n';
-import { getLanguage } from './config';
+import { getCurrentLanguage, getUITranslation } from '../i18n';
 
 export function calculateReadingTime(content: string): string {
   // Remove HTML tags and markdown syntax
@@ -30,12 +29,12 @@ export function calculateReadingTime(content: string): string {
   // Ensure minimum 1 minute reading time
   const readingMinutes = Math.max(1, totalMinutes);
 
-  const lang = getLanguage();
+  const lang = getCurrentLanguage();
   const prefix = getUITranslation(lang, 'readingTimePrefix');
   const suffix = getUITranslation(lang, 'readingTimeSuffix');
 
   if (prefix) {
-    return `${prefix}${readingMinutes}${suffix}`;
+    return `${prefix} ${readingMinutes} ${suffix}`;
   }
 
   return `${readingMinutes} ${suffix}`;

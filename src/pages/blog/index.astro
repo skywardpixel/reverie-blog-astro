@@ -4,7 +4,7 @@ import BlogCard from '../../components/BlogCard.astro';
 import PageHero from '../../components/PageHero.astro';
 import { getCollection } from 'astro:content';
 import { format } from 'date-fns';
-import { getSiteTitle, t, getContent } from '../../utils/config';
+import { getSiteTitle, t, siteConfig } from '../../utils/config';
 
 const posts = (await getCollection('blog'))
   .filter(post => !post.data.draft)
@@ -28,12 +28,12 @@ const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
 
 <BaseLayout
   title={t('blog')}
-  description={`${getContent('blogMetaDescription')} - ${getSiteTitle()}`}
+  description={`${siteConfig.blogMetaDescription} - ${getSiteTitle()}`}
   activeNav="blog"
 >
   <PageHero
     title={t('blog')}
-    subtitle={getContent('welcomeDescription')}
+    subtitle={siteConfig.blogSubtitle}
     animatedGradient={true}
     stats={[
       { number: posts.length, label: t('posts') },
@@ -49,7 +49,7 @@ const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
             <h2 class="year-title">
               <span class="year-number">{year}</span>
               <span class="year-count">
-                {postsByYear[Number(year)].length} posts
+                {postsByYear[Number(year)].length} {t('posts')}
               </span>
             </h2>
             <div class="posts-grid">

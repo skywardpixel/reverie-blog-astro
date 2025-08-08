@@ -1,18 +1,17 @@
-import { siteConfig, siteContent } from '../config/site';
-import { ui, getUITranslation } from '../i18n';
+import { siteConfig } from '../config/site';
+import { ui, getCurrentLanguage, getUITranslation } from '../i18n';
 import type { SiteConfig } from '../config/site';
-import type { Language } from '../i18n';
+import type { Language, UIKey } from '../i18n';
 
 // Export the main config for easy importing
 export { siteConfig };
 
 // Utility functions for accessing config values
-export const getSiteTitle = () => siteContent[siteConfig.language].title;
-export const getSiteDescription = () =>
-  siteContent[siteConfig.language].description;
-export const getAuthor = () => siteContent[siteConfig.language].author;
+export const getSiteTitle = () => siteConfig.title;
+export const getSiteDescription = () => siteConfig.description;
+export const getAuthor = () => siteConfig.author;
 export const getSiteUrl = () => siteConfig.url;
-export const getLanguage = (): Language => siteConfig.language;
+export const getLanguage = (): Language => getCurrentLanguage();
 
 // Theme utilities
 export const getTheme = () => siteConfig.theme;
@@ -21,16 +20,12 @@ export const getTheme = () => siteConfig.theme;
 export const getSocialLinks = () => siteConfig.social;
 
 // UI Translation utilities (for system labels)
-export const t = (key: keyof typeof ui.en) => {
-  const lang = getLanguage();
+export const t = (key: UIKey) => {
+  const lang = getCurrentLanguage();
   return getUITranslation(lang, key);
 };
 
-// Site Content utilities (for user content)
-export const getContent = (key: keyof typeof siteContent.en) => {
-  const lang = getLanguage();
-  return siteContent[lang][key];
-};
+// Direct config access - users can access siteConfig properties directly
 
 // Navigation with i18n support
 export const getMainNavigation = () => [

@@ -7,7 +7,7 @@ import {
   getSiteTitle,
   getSiteDescription,
   t,
-  getContent,
+  siteConfig,
 } from '../utils/config';
 
 const posts = (await getCollection('blog'))
@@ -16,20 +16,16 @@ const posts = (await getCollection('blog'))
   .slice(0, 3);
 ---
 
-<BaseLayout
-  title={`${getSiteTitle()} - Home`}
-  description={getSiteDescription()}
-  activeNav="home"
->
+<BaseLayout description={getSiteDescription()} activeNav="home">
   <section class="hero">
     <div class="container">
       <div class="hero-content">
         <h1 class="hero-title">
-          <span class="title-line">{getContent('welcomeTo')}</span>
+          <span class="title-line">{siteConfig.welcomeTo}</span>
           <span class="title-line title-gradient">{getSiteTitle()}</span>
         </h1>
         <p class="hero-description">
-          {getContent('heroDescription')}
+          {siteConfig.heroDescription}
         </p>
         <div class="hero-actions">
           <a href="/blog" class="btn btn-primary">
@@ -160,13 +156,13 @@ const posts = (await getCollection('blog'))
   }
 
   .hero-description {
-    font-family: var(--font-display);
+    font-family: var(--font-body);
     font-size: 1.25rem;
     font-weight: 300;
     line-height: 1.65;
     color: rgba(44, 62, 80, 0.8);
-    margin-bottom: 2rem;
-    max-width: 500px;
+    max-width: 600px;
+    margin: 0 auto 2rem auto;
   }
 
   .hero-actions {

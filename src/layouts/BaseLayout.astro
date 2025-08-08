@@ -10,7 +10,7 @@ import {
   getSocialLinks,
   getLanguage,
   t,
-  getContent,
+  siteConfig,
 } from '../utils/config';
 import '../styles/global.css';
 
@@ -95,7 +95,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || siteUrl);
           <div class="footer-content">
             <p>
               &copy; {new Date().getFullYear()}
-              {getSiteTitle()}. {getContent('footerText')}
+              {getSiteTitle()}. {siteConfig.footerText}
             </p>
             <div class="footer-links">
               {

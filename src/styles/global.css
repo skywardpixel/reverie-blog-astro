@@ -89,6 +89,30 @@ html:lang(zh-HK) {
   line-break: strict;
 }
 
+/* Automatic spacing around English characters in Chinese text */
+.content p,
+.hero-subtitle,
+.hero-description,
+.post-description,
+.card-description,
+time {
+  /* Add spacing around ASCII characters (letters, numbers) when adjacent to CJK */
+  text-spacing: ideograph-alpha ideograph-numeric;
+}
+
+/* Fallback for browsers that don't support text-spacing */
+@supports not (text-spacing: ideograph-alpha) {
+  .content p,
+  .hero-subtitle,
+  .hero-description,
+  .post-description,
+  .card-description,
+  time {
+    /* Use CSS to detect and add spacing around English in Chinese */
+    font-variant-numeric: proportional-nums;
+  }
+}
+
 body {
   min-height: 100vh;
   background: var(--color-bg);

@@ -1,21 +1,21 @@
 import { format } from 'date-fns';
 import { zhCN, enUS } from 'date-fns/locale';
-import { getLanguage } from './config';
+import { getCurrentLanguage } from '../i18n';
 
 // Get the appropriate date-fns locale based on the site language
 function getDateLocale() {
-  const language = getLanguage();
+  const language = getCurrentLanguage();
   return language === 'zh' ? zhCN : enUS;
 }
 
 // Format date with language-appropriate format and locale
 export function formatDate(date: Date): string {
-  const language = getLanguage();
+  const language = getCurrentLanguage();
   const locale = getDateLocale();
 
   if (language === 'zh') {
-    // Chinese format: 2024年1月15日
-    return format(date, 'yyyy年M月d日', { locale });
+    // Chinese format: 2024 年 1 月 15 日 (with proper spacing)
+    return format(date, 'yyyy 年 M 月 d 日', { locale });
   } else {
     // English format: January 15, 2024
     return format(date, 'MMMM dd, yyyy', { locale });
@@ -24,26 +24,26 @@ export function formatDate(date: Date): string {
 
 // Format date for blog post meta (slightly more compact)
 export function formatPostDate(date: Date): string {
-  const language = getLanguage();
+  const language = getCurrentLanguage();
   const locale = getDateLocale();
 
   if (language === 'zh') {
-    // Chinese format: 2024年1月15日
-    return format(date, 'yyyy年M月d日', { locale });
+    // Chinese format: 2024 年 1 月 15 日 (with proper spacing)
+    return format(date, 'yyyy 年 M 月 d 日', { locale });
   } else {
     // English format: Jan 15, 2024
     return format(date, 'MMM dd, yyyy', { locale });
   }
 }
 
-// Format date for card displays (most compact)
+// Format date for card displays (more readable)
 export function formatCardDate(date: Date): string {
-  const language = getLanguage();
+  const language = getCurrentLanguage();
   const locale = getDateLocale();
 
   if (language === 'zh') {
-    // Chinese format: 2024/1/15
-    return format(date, 'yyyy/M/d', { locale });
+    // Chinese format: 2024 年 1 月 15 日 (with proper spacing)
+    return format(date, 'yyyy 年 M 月 d 日', { locale });
   } else {
     // English format: Jan 15, 2024
     return format(date, 'MMM dd, yyyy', { locale });
@@ -52,9 +52,11 @@ export function formatCardDate(date: Date): string {
 
 // Get relative time (for future use)
 export function getRelativeTime(date: Date): string {
-  const language = getLanguage();
+  const language = getCurrentLanguage();
   const now = new Date();
-  const diffInDays = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24));
+  const diffInDays = Math.floor(
+    (now.getTime() - date.getTime()) / (1000 * 60 * 60 * 24)
+  );
 
   if (language === 'zh') {
     if (diffInDays === 0) return '今天';
