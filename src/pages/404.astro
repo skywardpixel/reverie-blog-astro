@@ -1,10 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getSiteTitle, t } from '../utils/config';
 ---
 
 <BaseLayout
-  title="404 - Page Not Found | Reverie Blog"
-  description="The page you're looking for doesn't exist. Explore our other content."
+  title={`404 - ${t('pageNotFoundTitle')} | ${getSiteTitle()}`}
+  description={t('pageNotFoundDescription')}
 >
   <section class="error-page">
     <div class="container">
@@ -18,10 +19,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
 
         <div class="error-message">
-          <h1 class="error-title">Page Not Found</h1>
+          <h1 class="error-title">{t('pageNotFoundTitle')}</h1>
           <p class="error-description">
-            The page you're looking for seems to have drifted away into the
-            digital ether. Let's help you find your way back to solid ground.
+            {t('pageNotFoundDescription')}
           </p>
 
           <div class="error-actions">
@@ -39,7 +39,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                 <polyline points="9 22 9 12 15 12 15 22"></polyline>
               </svg>
-              <span>Go Home</span>
+              <span>{t('goHome')}</span>
             </a>
             <a href="/blog" class="btn btn-secondary">
               <svg
@@ -59,16 +59,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 <line x1="12" y1="6" x2="16" y2="6"></line>
                 <line x1="12" y1="10" x2="16" y2="10"></line>
               </svg>
-              <span>Browse Articles</span>
+              <span>{t('blog')}</span>
             </a>
           </div>
 
           <div class="helpful-links">
-            <h3>Maybe you're looking for:</h3>
+            <h3>{t('helpfulLinks')}:</h3>
             <nav class="quick-links">
-              <a href="/blog" class="btn-link">Latest Articles</a>
-              <a href="/about" class="btn-link">About</a>
-              <a href="/" class="btn-link">Home</a>
+              <a href="/blog" class="btn-link">{t('latestPosts')}</a>
+              <a href="/about" class="btn-link">{t('about')}</a>
+              <a href="/" class="btn-link">{t('home')}</a>
             </nav>
           </div>
         </div>

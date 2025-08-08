@@ -1,6 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
-import { format } from 'date-fns';
+import { formatPostDate } from '../utils/date';
+import { t } from '../utils/config';
 import type { CollectionEntry } from 'astro:content';
 
 export interface Props {
@@ -11,9 +12,9 @@ export interface Props {
 const { data, readingTime } = Astro.props;
 const { title, description, publishDate, updatedDate, heroImage, tags } = data;
 
-const formattedPublishDate = format(new Date(publishDate), 'MMMM dd, yyyy');
+const formattedPublishDate = formatPostDate(new Date(publishDate));
 const formattedUpdatedDate = updatedDate
-  ? format(new Date(updatedDate), 'MMMM dd, yyyy')
+  ? formatPostDate(new Date(updatedDate))
   : null;
 ---
 
@@ -38,7 +39,9 @@ const formattedUpdatedDate = updatedDate
               formattedUpdatedDate && (
                 <>
                   <span class="meta-separator">•</span>
-                  <span>Updated {formattedUpdatedDate}</span>
+                  <span>
+                    {t('updated')} {formattedUpdatedDate}
+                  </span>
                 </>
               )
             }
@@ -66,19 +69,19 @@ const formattedUpdatedDate = updatedDate
 
         <aside class="post-sidebar">
           <div class="toc-card">
-            <h3>Table of Contents</h3>
+            <h3>{t('tableOfContents')}</h3>
             <nav class="toc-nav" id="toc-nav">
               <!-- TOC will be generated via JavaScript -->
             </nav>
           </div>
 
           <div class="share-card">
-            <h3>Share</h3>
+            <h3>{t('share')}</h3>
             <div class="share-buttons">
               <button
                 class="btn-social-icon"
                 data-share="twitter"
-                aria-label="Share on Twitter"
+                aria-label={t('ariaShareTwitter')}
               >
                 <svg
                   width="20"
@@ -99,7 +102,7 @@ const formattedUpdatedDate = updatedDate
               <button
                 class="btn-social-icon"
                 data-share="copy"
-                aria-label="Copy link"
+                aria-label={t('ariaCopyLink')}
               >
                 <svg
                   width="20"
@@ -202,18 +205,8 @@ const formattedUpdatedDate = updatedDate
     line-height: 1.6;
     color: var(--color-text-secondary);
     margin-bottom: 1.5rem;
-    font-family: var(--font-serif);
-    font-weight: 500;
-  }
-
-  /* Chinese post descriptions use sans-serif for better readability */
-  .post-description:lang(zh),
-  .post-description:lang(zh-CN),
-  .post-description:lang(zh-TW),
-  .post-description:lang(zh-HK) {
-    font-family: var(--font-display);
-    font-weight: 500;
-    line-height: 1.7;
+    font-family: var(--font-body);
+    font-weight: 400;
   }
 
   .post-tags {

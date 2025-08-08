@@ -3,47 +3,44 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PageLayout from '../components/PageLayout.astro';
 import Card from '../components/Card.astro';
 import SocialLinks from '../components/SocialLinks.astro';
-import { getSiteTitle } from '../utils/config';
+import { getSiteTitle, t, getContent } from '../utils/config';
 ---
 
 <BaseLayout
-  title="About"
-  description={`Learn more about me and this personal blog - ${getSiteTitle()}`}
+  title={t('about')}
+  description={`${getContent('aboutMetaDescription')} - ${getSiteTitle()}`}
   activeNav="about"
 >
   <PageLayout
-    title="About"
-    subtitle="A personal space for thoughts, stories, and life reflections"
+    title={t('about')}
+    subtitle={getContent('aboutSubtitle')}
     hasSidebar={true}
   >
     <Card slot="main" hover={false}>
-      <h2>Welcome</h2>
+      <h2>{getContent('welcomeTitle')}</h2>
       <p>
-        This is my personal space where I share thoughts on life, experiences,
-        and whatever catches my interest. It's a simple blog without a specific
-        focus—just honest reflections and stories.
+        {getContent('aboutContent')}
       </p>
-      <h3>What You'll Find</h3>
+      <h3>{getContent('whatYouFind')}</h3>
       <ul>
-        <li>Personal reflections and life experiences</li>
-        <li>Thoughts on books, movies, and music</li>
-        <li>Daily observations and random musings</li>
-        <li>Updates on projects and goals</li>
+        <li>{getContent('aboutList1')}</li>
+        <li>{getContent('aboutList2')}</li>
+        <li>{getContent('aboutList3')}</li>
+        <li>{getContent('aboutList4')}</li>
       </ul>
       <p>
-        Thanks for stopping by. Feel free to reach out if something resonates
-        with you.
+        {getContent('thankYou')}
       </p>
     </Card>
 
     <Card slot="sidebar" className="connect-card" hover={false}>
-      <h3>Let's Connect</h3>
-      <p>Find me on these platforms:</p>
+      <h3>{getContent('letsConnect')}</h3>
+      <p>{getContent('findMeOn')}</p>
       <SocialLinks />
     </Card>
 
     <Card slot="sidebar" className="tech-card" hover={false}>
-      <h3>Built With</h3>
+      <h3>{getContent('builtWith')}</h3>
       <div class="tech-list">
         <span class="btn-link">Astro</span>
         <span class="btn-link">MDX</span>

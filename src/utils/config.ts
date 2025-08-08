@@ -1,14 +1,18 @@
-import { siteConfig } from '../config/site';
+import { siteConfig, siteContent } from '../config/site';
+import { ui, getUITranslation } from '../i18n';
 import type { SiteConfig } from '../config/site';
+import type { Language } from '../i18n';
 
 // Export the main config for easy importing
 export { siteConfig };
 
 // Utility functions for accessing config values
-export const getSiteTitle = () => siteConfig.title;
-export const getSiteDescription = () => siteConfig.description;
+export const getSiteTitle = () => siteContent[siteConfig.language].title;
+export const getSiteDescription = () =>
+  siteContent[siteConfig.language].description;
+export const getAuthor = () => siteContent[siteConfig.language].author;
 export const getSiteUrl = () => siteConfig.url;
-export const getAuthor = () => siteConfig.author;
+export const getLanguage = (): Language => siteConfig.language;
 
 // Theme utilities
 export const getTheme = () => siteConfig.theme;
@@ -16,11 +20,23 @@ export const getTheme = () => siteConfig.theme;
 // Social links
 export const getSocialLinks = () => siteConfig.social;
 
-// Navigation (hardcoded since it's unlikely to change)
+// UI Translation utilities (for system labels)
+export const t = (key: keyof typeof ui.en) => {
+  const lang = getLanguage();
+  return getUITranslation(lang, key);
+};
+
+// Site Content utilities (for user content)
+export const getContent = (key: keyof typeof siteContent.en) => {
+  const lang = getLanguage();
+  return siteContent[lang][key];
+};
+
+// Navigation with i18n support
 export const getMainNavigation = () => [
-  { name: 'Home', href: '/', id: 'home' },
-  { name: 'Blog', href: '/blog', id: 'blog' },
-  { name: 'About', href: '/about', id: 'about' },
+  { name: t('home'), href: '/', id: 'home' },
+  { name: t('blog'), href: '/blog', id: 'blog' },
+  { name: t('about'), href: '/about', id: 'about' },
 ];
 
 // Hardcoded feature flags (simplified)
@@ -36,3 +52,4 @@ export const getFullUrl = (path: string = '') => {
 
 // Type exports for TypeScript support
 export type { SiteConfig } from '../config/site';
+export type { Language } from '../i18n';

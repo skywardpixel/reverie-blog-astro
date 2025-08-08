@@ -3,16 +3,40 @@ export interface Props {
   title: string;
   subtitle?: string;
   className?: string;
+  stats?: Array<{ number: string | number; label: string }>;
+  animatedGradient?: boolean;
 }
 
-const { title, subtitle, className = '' } = Astro.props;
+const {
+  title,
+  subtitle,
+  className = '',
+  stats,
+  animatedGradient = false,
+} = Astro.props;
 ---
 
 <section class={`page-hero ${className}`}>
   <div class="container">
     <div class="hero-content">
-      <h1 class="hero-title">{title}</h1>
+      <h1
+        class={`hero-title ${animatedGradient ? 'hero-title--animated' : ''}`}
+      >
+        {title}
+      </h1>
       {subtitle && <p class="hero-subtitle">{subtitle}</p>}
+      {
+        stats && stats.length > 0 && (
+          <div class="stats-row">
+            {stats.map(stat => (
+              <div class="stat-item">
+                <span class="stat-number">{stat.number}</span>
+                <span class="stat-label" set:html={stat.label} />
+              </div>
+            ))}
+          </div>
+        )
+      }
     </div>
   </div>
 </section>
@@ -45,17 +69,106 @@ const { title, subtitle, className = '' } = Astro.props;
     -webkit-text-fill-color: transparent;
   }
 
+  .hero-title--animated {
+    background: linear-gradient(
+      90deg,
+      var(--color-text) 0%,
+      var(--color-accent) 25%,
+      var(--color-accent-light) 50%,
+      var(--color-accent) 75%,
+      var(--color-text) 100%
+    );
+    animation: gradient-flow 8s ease-in-out infinite;
+    background-size: 400% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  @keyframes gradient-flow {
+    0% {
+      background-position: 0% 50%;
+    }
+    25% {
+      background-position: 100% 50%;
+    }
+    50% {
+      background-position: 200% 50%;
+    }
+    75% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
   .hero-subtitle {
-    font-family: var(--font-serif);
+    font-family: var(--font-display);
     font-size: 1.25rem;
-    font-weight: 500;
+    font-weight: 300;
     line-height: 1.65;
     color: rgba(44, 62, 80, 0.8);
     max-width: 600px;
     margin: 0 auto;
   }
 
-  @media (max-width: 640px) {
+  .stats-row {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 3rem;
+  }
+
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.5rem 2rem;
+    background: var(--color-surface);
+    backdrop-filter: blur(10px);
+    border: none;
+    border-radius: 12px;
+    transition: all 200ms ease;
+    width: 120px;
+    min-width: 120px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .stat-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    background: var(--color-border-light);
+  }
+
+  .stat-number {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+    background: linear-gradient(
+      135deg,
+      var(--color-accent) 0%,
+      var(--color-accent-light) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .stat-label {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    font-weight: 500;
+    text-align: center;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 768px) {
     .page-hero {
       padding: 2rem 0 1.5rem;
     }
@@ -66,6 +179,25 @@ const { title, subtitle, className = '' } = Astro.props;
 
     .hero-subtitle {
       font-size: 1.1rem;
+    }
+
+    .stats-row {
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .stat-item {
+      padding: 1rem 1.5rem;
+      width: 100px;
+      min-width: 100px;
+    }
+
+    .stat-number {
+      font-size: 1.5rem;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
     }
   }
 </style>

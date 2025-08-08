@@ -1,5 +1,5 @@
 ---
-import { format } from 'date-fns';
+import { formatCardDate } from '../utils/date';
 import type { CollectionEntry } from 'astro:content';
 
 export interface Props {
@@ -8,7 +8,7 @@ export interface Props {
 
 const { post } = Astro.props;
 const { title, description, publishDate, heroImage, tags } = post.data;
-const formattedDate = format(new Date(publishDate), 'MMMM dd, yyyy');
+const formattedDate = formatCardDate(new Date(publishDate));
 ---
 
 <article class="blog-card">
