@@ -1,5 +1,13 @@
 import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
+import {
+  getSiteTitle,
+  getSiteDescription,
+  getSiteUrl,
+  getAuthor,
+  getLanguage,
+  siteConfig,
+} from '../utils/config';
 
 export async function GET(context) {
   const posts = await getCollection('blog');
@@ -12,25 +20,24 @@ export async function GET(context) {
     );
 
   return rss({
-    title: 'Reverie Blog',
-    description:
-      'Personal thoughts, stories, and reflections from my life and experiences.',
-    site: context.site || 'https://reverie-blog.netlify.app',
+    title: getSiteTitle(),
+    description: getSiteDescription(),
+    site: context.site || getSiteUrl(),
     items: publishedPosts.map(post => ({
       title: post.data.title,
       pubDate: post.data.publishDate,
       description: post.data.description,
       link: `/blog/${post.slug}/`,
       categories: post.data.tags || [],
-      author: 'Reverie Blog',
+      author: getAuthor(),
       customData: post.data.updatedDate
         ? `<lastBuildDate>${post.data.updatedDate.toUTCString()}</lastBuildDate>`
         : undefined,
     })),
     customData: `
-      <language>en-us</language>
-      <managingEditor>hello@reverie-blog.com</managingEditor>
-      <webMaster>hello@reverie-blog.com</webMaster>
+      <language>${getLanguage() === 'zh' ? 'zh-cn' : 'en-us'}</language>
+      <managingEditor>${siteConfig.social.email}</managingEditor>
+      <webMaster>${siteConfig.social.email}</webMaster>
       <docs>https://www.rssboard.org/rss-specification</docs>
       <generator>Astro v${process.env.npm_package_version || '5.0.0'}</generator>
       <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
