@@ -333,6 +333,18 @@ const formattedUpdatedDate = updatedDate
 
   /* Share buttons use unified btn-social-icon class */
 
+  /* Scroll margin for all headings to account for fixed navbar */
+  .content h1,
+  .content h2,
+  .content h3,
+  .content h4,
+  .content h5,
+  .content h6 {
+    scroll-margin-top: calc(
+      var(--space-lg) + var(--space-sm) + var(--space-2xl)
+    );
+  }
+
   /* Post Navigation */
   .post-navigation {
     margin-top: 4rem;
@@ -428,14 +440,14 @@ const formattedUpdatedDate = updatedDate
       font-size: 1.1rem;
     }
 
-    /* Mobile scroll margin maintained for content */
+    /* Mobile scroll margin - account for smaller navbar position */
     .content h1,
     .content h2,
     .content h3,
     .content h4,
     .content h5,
     .content h6 {
-      scroll-margin-top: calc(var(--space-2xl) + var(--space-lg) + 1rem);
+      scroll-margin-top: calc(var(--space-md) + var(--space-2xl));
     }
   }
 </style>
