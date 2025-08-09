@@ -34,7 +34,6 @@ const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
   <PageHero
     title={t('blog')}
     subtitle={siteConfig.blogSubtitle}
-    animatedGradient={true}
     stats={[
       { number: posts.length, label: t('posts') },
       { number: years.length, label: t('yearsWriting') },
