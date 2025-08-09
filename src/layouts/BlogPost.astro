@@ -459,7 +459,9 @@ const formattedUpdatedDate = updatedDate
     const postContent = document.querySelector('.post-content');
 
     if (tocNav && postContent) {
-      const headings = postContent.querySelectorAll('h2, h3');
+      const headings = postContent.querySelectorAll(
+        'h2:not(.no-toc), h3:not(.no-toc)'
+      );
 
       if (headings.length > 0) {
         headings.forEach((heading, index) => {
