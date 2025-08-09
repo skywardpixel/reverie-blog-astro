@@ -8,7 +8,7 @@ import { getSiteTitle, t, siteConfig } from '../utils/config';
 
 <BaseLayout
   title={t('about')}
-  description={`Learn more about me and this personal blog - ${getSiteTitle()}`}
+  description={`${siteConfig.aboutMetaDescription} - ${getSiteTitle()}`}
   activeNav="about"
 >
   <PageLayout
