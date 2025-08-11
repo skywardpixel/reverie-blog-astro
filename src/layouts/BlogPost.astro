@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import Giscus from '../components/Giscus.astro';
 import { formatPostDate } from '../utils/date';
 import { t } from '../utils/config';
 import type { CollectionEntry } from 'astro:content';
@@ -63,8 +64,15 @@ const formattedUpdatedDate = updatedDate
 
     <div class="container">
       <div class="post-content-wrapper">
-        <div class="post-content content">
-          <slot />
+        <div class="post-main">
+          <div class="post-content content">
+            <slot />
+          </div>
+
+          <!-- Comments Section -->
+          <div class="comments-section">
+            <Giscus />
+          </div>
         </div>
 
         <aside class="post-sidebar">
@@ -222,6 +230,10 @@ const formattedUpdatedDate = updatedDate
     grid-template-columns: 1fr 300px;
     gap: 3rem;
     margin-bottom: 3rem;
+  }
+
+  .post-main {
+    min-width: 0;
   }
 
   .post-content {
@@ -395,6 +407,11 @@ const formattedUpdatedDate = updatedDate
   }
 
   /* TOC styles moved to global.css to work with JS-generated content */
+
+  /* Comments Section */
+  .comments-section {
+    margin-top: 3rem;
+  }
 
   @media (max-width: 768px) and (min-width: 641px) {
     .hero-content {

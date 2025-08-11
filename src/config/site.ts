@@ -33,6 +33,26 @@ export const siteConfig = {
     github: 'https://github.com',
     email: 'hello@example.com',
   },
+
+  // Comments Configuration (Giscus)
+  // To set up, visit https://giscus.app and configure your repository
+  comments: {
+    enabled: true,
+    provider: 'giscus' as const,
+    giscus: {
+      repo: 'skywardpixel/reverie-blog-astro', // Your GitHub repo (format: username/repo)
+      repoId: 'R_kgDOPZydog', // Get from https://giscus.app
+      category: 'General', // Discussion category
+      categoryId: 'DIC_kwDOPZydos4CuCQd', // Get from https://giscus.app
+      mapping: 'pathname' as const, // How to map pages to discussions
+      strict: false, // Use strict title matching
+      reactionsEnabled: true, // Enable reactions
+      emitMetadata: false, // Emit discussion metadata
+      inputPosition: 'bottom' as const, // Comment box position
+      theme: 'light' as const, // Will be dynamically updated
+      lang: 'en' as const, // Comment interface language
+    },
+  },
 } as const;
 
 // Type definitions for better TypeScript support
